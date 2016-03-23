@@ -6,10 +6,11 @@
 SHELL := $(shell echo $$SHELL)
 
 TARGET :=  ~/
+INIT_SCRIPT = configure.init
+
 
 APP = stow
-ARGS = -nv -t $(TARGET)
-INIT_SCRIPT = configure.init
+ARGS = -v -t $(TARGET) --ignore=.directory --ignore=$(INIT_SCRIPT)
 
 
 SUBDIRS = $(shell find . -maxdepth 1 -type d -not -path '*/\.*' -printf "%f " )
@@ -22,7 +23,7 @@ default:
 
 $(SUBDIRS):
 	@echo "Installing pkg $@"
-	[[ -f $@/$(INIT_SCRIPT) ]] && ./$@/$(INIT_SCRIPT)
+	@if [ -a $@/$(INIT_SCRIPT) ]; then $@/$(INIT_SCRIPT) $(TARGET); fi;
 	$(APP) $(ARGS) $@
 
 
