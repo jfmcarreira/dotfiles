@@ -1,0 +1,3 @@
+# Create necessary dirs
+mkdir -p .bashrc.d
+mkdir -p .bash_completion.d
