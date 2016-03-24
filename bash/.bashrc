@@ -44,6 +44,7 @@ fi
 
 
 USE_BASH_IT=false
+stty echo
 
 # End
 

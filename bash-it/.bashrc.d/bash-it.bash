@@ -4,7 +4,7 @@
 USE_BASH_IT=true
 
 # bash-it location
-export BASH_IT=~/.bashrc.d/bash-it/
+export BASH_IT=~/.bashrc.d/bash-it
 
 # location ${BASH_IT}/themes/
 export BASH_IT_THEME='carreira'
