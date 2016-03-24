@@ -9,20 +9,20 @@ function cluster_name ()
 {
   if [ $USER == "lljfmc" ]
   then
-    echo -e " ${yellow}(in HPC)"
+    echo -e " ${bright_yellow}(HPC)"
   elif [ $USER == "jcarreira.it" ]
   then
     if [ $( hostname ) == "athena" ]
     then
-      echo -e " ${cyan}(in IT)"
+      echo -e " ${bright_cyan}(IT)"
     else
-      echo -e " ${yellow}(in HPC)"
+      echo -e " ${bright_yellow}(IT)"
     fi
   fi
 }
 
 function prompt_command() {
-  PS1="$(battery_char)$(clock_only)${yellow}$(ruby_version_prompt) ${brightgreen}\u@\h$(cluster_name) ${brightblue}\w${blue}$(scm_prompt_info) ${brightblue}\$${reset_color} "
+  PS1="$(battery_char)$(clock_only)${yellow}$(ruby_version_prompt) ${bright_green}\u@\h$(cluster_name) ${bright_blue}\w${blue}$(scm_prompt_info) ${brightblue}\$${reset_color} "
 #   PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\]$(cluster_name) \w \$\[\033[00m\] "
 }
 
