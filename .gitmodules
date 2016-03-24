@@ -1,0 +1,3 @@
+[submodule "modules/bash-it.git"]
+	path = modules/bash-it.git
+	url = git@github.com:jfmcarreira/bash-it.git
