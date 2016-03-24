@@ -13,4 +13,3 @@ export BASH_IT_THEME='carreira'
 export SCM_CHECK=true
 
 source ${BASH_IT}/bash_it.sh
-
