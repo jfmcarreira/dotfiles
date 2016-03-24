@@ -1,22 +1,31 @@
+#!/usr/bin/env bash
+
 ##################################################
 # bashrc - control PS1
 ##################################################
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
+function cluster_name ()
+{
+  if [ $USER == "lljfmc" ]
+  then
+    echo -e " ${yellow}(in HPC)"
+  elif [ $USER == "jcarreira.it" ]
+  then
+    if [ $( hostname ) == "athena" ]
+    then
+      echo -e " ${cyan}(in IT)"
     else
-        color_prompt=
+      echo -e " ${yellow}(in HPC)"
     fi
-fi
+  fi
+}
+
+function prompt_command() {
+  PS1="$(battery_char)$(clock_only)${yellow}$(ruby_version_prompt) ${brightgreen}\u@\h$(cluster_name) ${brightblue}\w${blue}$(scm_prompt_info) ${brightblue}\$${reset_color} "
+#   PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\]$(cluster_name) \w \$\[\033[00m\] "
+}
+
 
 # Change the window title of X terminals
 case ${TERM} in
@@ -36,14 +45,17 @@ esac
 # instead of using /etc/DIR_COLORS.  Try to use the external file
 # first to take advantage of user additions.
 use_color=false
-if type -P dircolors >/dev/null ; then
+if type -P dircolors >/dev/null
+then
   # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
   LS_COLORS=
-  if [[ -f ~/.dir_colors ]] ; then
+  if [[ -f ~/.dir_colors ]]
+  then
     # If you have a custom file, chances are high that it's not the default.
     used_default_dircolors="no"
     eval "$(dircolors -b ~/.dir_colors)"
-  elif [[ -f /etc/DIR_COLORS ]] ; then
+  elif [[ -f /etc/DIR_COLORS ]]
+  then
     # People might have customized the system database.
     used_default_dircolors="maybe"
     eval "$(dircolors -b /etc/DIR_COLORS)"
@@ -51,7 +63,8 @@ if type -P dircolors >/dev/null ; then
     used_default_dircolors="yes"
     eval "$(dircolors -b)"
   fi
-  if [[ -n ${LS_COLORS:+set} ]] ; then
+  if [[ -n ${LS_COLORS:+set} ]]
+  then
     use_color=true
 
     # The majority of systems out there do not customize these files, so we
@@ -79,30 +92,35 @@ else
   esac
 fi
 
-if ${use_color} ; then
+if ${use_color}
+then
 
-  if [ $(whoami) == "lljfmc" ]; then
-    PS1+='\[\033[01;32m\]\u@\h \[\033[01;33m\](HPC) \[\033[01;34m\]\w \$\[\033[00m\] '
-  elif [ $(whoami) == "jcarreira.it" ]; then
-    if [ $( hostname ) == "athena" ]; then
-      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;36m\] (itCluster) \[\033[01;34m\]\w\[\033[01;34m\] \$\[\033[00m\] '
-    else
-      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;33m\] (itCluster) \[\033[01;34m\]\w\[\033[01;34m\] \$\[\033[00m\] '
-    fi
-  else
-    if [[ ${EUID} == 0 ]] ; then
+  if [[ ${EUID} == 0 ]]
+  then
       PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
-    else
-      PS1+='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
-    fi
+  else
+#     if [ $(whoami) == "lljfmc" ]
+#     then
+#       PS1+='\[\033[01;32m\]\u@\h \[\033[01;33m\](HPC) \[\033[01;34m\]\w \$\[\033[00m\] '
+#     elif [ $(whoami) == "jcarreira.it" ]
+#     then
+#       if [ $( hostname ) == "athena" ]
+#       then
+#         PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;36m\] (itCluster) \[\033[01;34m\]\w\[\033[01;34m\] \$\[\033[00m\] '
+#       else
+#         PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;33m\] (itCluster) \[\033[01;34m\]\w\[\033[01;34m\] \$\[\033[00m\] '
+#       fi
+#     else
+        prompt_command
+#     fi
   fi
-
   alias ls='ls --color=auto'
   alias grep='grep --colour=auto'
   alias egrep='egrep --colour=auto'
   alias fgrep='fgrep --colour=auto'
 else
-  if [[ ${EUID} == 0 ]] ; then
+  if [[ ${EUID} == 0 ]]
+  then
     # show root@ when we don't have colors
     PS1+='\u@\h \W \$ '
   else

@@ -33,7 +33,7 @@ esac
 
 # Put your fun stuff here.
 if [ -d ~/.bashrc.d ] ; then
-    for sh in ~/.bashrc.d/* ; do
+    for sh in ~/.bashrc.d/*.bash ; do
         [[ -r ${sh} ]] && source "${sh}"
     done
 fi

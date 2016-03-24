@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Check for interactive bash and that we haven't already been sourced.
 if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
 
