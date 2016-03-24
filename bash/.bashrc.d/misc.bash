@@ -32,7 +32,7 @@ shopt -s histappend
 # Disabled by default due to concerns related to system recovery when $HOME
 # is under duress, or lives somewhere flaky (like NFS).  Constantly syncing
 # the history will halt the shell prompt until it's finished.
-# PROMPT_COMMAND='history -a'
+PROMPT_COMMAND='history -a'
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
