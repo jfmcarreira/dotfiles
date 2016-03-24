@@ -9,21 +9,16 @@ function cluster_name ()
 {
   if [ $USER == "lljfmc" ]
   then
-    echo -e " ${bright_yellow}(HPC)"
+    echo -e " \[\e[0;93m\](HPC)"
   elif [ $USER == "jcarreira.it" ]
   then
     if [ $( hostname ) == "athena" ]
     then
-      echo -e " ${bright_cyan}(IT)"
+      echo -e " \[\e[0;96m\](IT)"
     else
-      echo -e " ${bright_yellow}(IT)"
+      echo -e " \[\e[0;93m\](IT)"
     fi
   fi
-}
-
-function prompt_command() {
-  PS1="$(battery_char)$(clock_only)${yellow}$(ruby_version_prompt) ${bright_green}\u@\h$(cluster_name) ${bright_blue}\w ${brightblue}\$${reset_color} "
-#   PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\]$(cluster_name) \w \$\[\033[00m\] "
 }
 
 
@@ -97,23 +92,11 @@ then
 
   if [[ ${EUID} == 0 ]]
   then
-      PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+    PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
   else
-#     if [ $(whoami) == "lljfmc" ]
-#     then
-#       PS1+='\[\033[01;32m\]\u@\h \[\033[01;33m\](HPC) \[\033[01;34m\]\w \$\[\033[00m\] '
-#     elif [ $(whoami) == "jcarreira.it" ]
-#     then
-#       if [ $( hostname ) == "athena" ]
-#       then
-#         PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;36m\] (itCluster) \[\033[01;34m\]\w\[\033[01;34m\] \$\[\033[00m\] '
-#       else
-#         PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;33m\] (itCluster) \[\033[01;34m\]\w\[\033[01;34m\] \$\[\033[00m\] '
-#       fi
-#     else
-        prompt_command
-#     fi
+    [[ $USE_BASH_IT == false ]] && PS1+="\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
   fi
+
   alias ls='ls --color=auto'
   alias grep='grep --colour=auto'
   alias egrep='egrep --colour=auto'
