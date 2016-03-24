@@ -94,7 +94,10 @@ then
   then
     PS1+='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
   else
-    [[ $USE_BASH_IT == false ]] && PS1+="\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
+    if [[ ! $USE_BASH_IT == true  ]]
+    then
+      PS1+="\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
+    fi
   fi
 
   alias ls='ls --color=auto'

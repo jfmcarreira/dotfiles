@@ -43,5 +43,7 @@ if [ -f ~/.bashrc_private ] ; then
 fi
 
 
+USE_BASH_IT=false
+
 # End
 
