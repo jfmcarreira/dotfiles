@@ -9,8 +9,8 @@ HISTSIZE=5000000
 HISTFILESIZE=2000
 
 # don't put duplicate lines or lines starting with space in the history. # See bash(1) for more options
-HISTCONTROL=ignoredups,ignoreboth
-
+HISTCONTROL=ignoredups
+#HISTCONTROL=ignoreboth
 
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
