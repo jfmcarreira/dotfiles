@@ -11,6 +11,8 @@ then
 fi
 
 alias reload='source ~/.bashrc'
+alias updatedotfiles='git -C ~/.dotfiles pull && git -C ~/.dotfiles submodule foreach git pull && source ~/.bashrc'
+
 alias utop='htop -u jcarreira.it'
 alias matlab_cmd='matlab -nosplash -nodesktop -nojvm -nodisplay'
 alias process='ps aux | grep -v grep | grep'
