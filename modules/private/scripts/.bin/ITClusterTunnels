@@ -1,0 +1,19 @@
+#!/bin/bash
+
+HOSTNAME=$(hostname)
+
+TUNNEL_CMD="autossh -M 0 -o "ServerAliveInterval 45" -o "ServerAliveCountMax 2" -fN"
+
+case $HOSTNAME in
+  cerberus)
+    # Tunnel Mercury
+    ps aux | grep autossh | grep jcarreira | grep fcarreira.dynip.sapo.pt || $TUNNEL_CMD jcarreira@fcarreira.dynip.sapo.pt -R 0.0.0.0:22022:0.0.0.0:22
+    # Tunnel SOCKS Surrey
+    ps aux | grep autossh | grep jc00347 | grep cvssp-ssh.ee.surrey.ac.uk | grep 9191 || $TUNNEL_CMD jc00347@cvssp-ssh.ee.surrey.ac.uk -D 0.0.0.0:9191
+  ;;
+  zeus)
+    # Tunnel IT - Hydra HPC
+    ps aux | grep autossh | grep jc00347 | grep cvssp-ssh.ee.surrey.ac.uk | grep 22020 || $TUNNEL_CMD jc00347@cvssp-ssh.ee.surrey.ac.uk -L 21021:127.0.0.1:21021
+  ;;
+esac
+
