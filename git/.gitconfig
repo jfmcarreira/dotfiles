@@ -15,6 +15,12 @@
 	insteadOf = https://chromium.googlesource.com/
 	insteadOf = https://chromium.googlesource.com/a/
 
+[url "zeus.itleiria.pt:~/GITServer/"]
+  insteadOf = itcluster:
+[url "zeus.itleiria.pt:~/GITServer/"]
+  pushInsteadOf = itcluster:
+
+
 [url "atlas.itleiria.pt:/nfs/data/git_projects/"]
         insteadOf = atlas:
 [url "atlas.itleiria.pt:/nfs/data/git_projects/"]
