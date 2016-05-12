@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+
+##################################################
+# Bash completion
+##################################################
+
 # Shell is non-interactive.  Be done now!
 [[ $- != *i* ]] && return
 

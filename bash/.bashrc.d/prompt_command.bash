@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 
-
-# Shell is non-interactive.  Be done now!
-[[ $- != *i* ]] && return
-
-
 ##################################################
 # bashrc - control PS1
 ##################################################
 
+# Shell is non-interactive.  Be done now!
+[[ $- != *i* ]] && return
 
 function cluster_name ()
 {
