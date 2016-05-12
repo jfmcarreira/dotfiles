@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+
+# Shell is non-interactive.  Be done now!
+[[ $- != *i* ]] && return
+
+
 ##################################################
 # bashrc - control PS1
 ##################################################

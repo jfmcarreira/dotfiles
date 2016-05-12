@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 
+# Shell is non-interactive.  Be done now!
+[[ $- != *i* ]] && return
+
+
 USE_BASH_IT=true
 
 # bash-it location

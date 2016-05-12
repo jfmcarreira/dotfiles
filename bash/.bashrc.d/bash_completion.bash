@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Shell is non-interactive.  Be done now!
+[[ $- != *i* ]] && return
+
 # Check for interactive bash and that we haven't already been sourced.
 if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
 
