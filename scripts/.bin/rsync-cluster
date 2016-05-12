@@ -1,0 +1,61 @@
+#!/bin/bash
+
+run_echo()
+{
+  echo $@
+  eval $@
+}
+
+
+server=zeus.itleiria.pt
+exclude_file=.rsync_cluster_exclude
+
+if [[ -z $RSYNC_CLUSTER_LOCAL_HOME ]]
+then
+  local_home=$HOME
+fi
+if [[ -z $RSYNC_CLUSTER_REMOTE_HOME ]]
+then
+  echo "checking remote home using ssh... considered adding this to bashrc: export RSYNC_CLUSTER_REMOTE_HOME=value "
+  export RSYNC_CLUSTER_REMOTE_HOME=$( ssh zeus.itleiria.pt "echo \$HOME" )
+fi
+
+remote_home=$RSYNC_CLUSTER_REMOTE_HOME
+rsync_exclude=
+if [[ -f ${exclude_file} ]]
+then
+  rsync_exclude=--exclude-from=${exclude_file}
+fi
+
+args=
+command=$1
+curr_dir=$( pwd )
+remote_dir=$( echo ${curr_dir} | sed "s#${local_home}#${remote_home}#g" )
+case $command in
+    push)
+      origin="${curr_dir}/"
+      destination="${server}:${remote_dir}/"
+    ;;
+    pull)
+      origin="${server}:${remote_dir}/"
+      destination="${curr_dir}/"
+    ;;
+    push-delete)
+      origin="${curr_dir}/"
+      destination="${server}:${remote_dir}/"
+      args="--delete-excluded"
+    ;;
+    pull-delete)
+      origin="${server}:${remote_dir}/"
+      destination="${curr_dir}/"
+      args="--delete-excluded"
+    ;;
+    *)
+      exit
+    ;;
+esac
+
+
+run_echo "rsync -avzru ${args} ${rsync_exclude} ${origin} ${destination}"
+
+
