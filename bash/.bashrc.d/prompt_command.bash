@@ -94,11 +94,11 @@ then
 
   if [[ ${EUID} == 0 ]]
   then
-    PS1+='\n\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+    PS1="\n\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] "
   else
     if [[ ! $USE_BASH_IT == true  ]]
     then
-      PS1+="\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
+      PS1="\n\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
     fi
   fi
 
@@ -110,8 +110,8 @@ else
   if [[ ${EUID} == 0 ]]
   then
     # show root@ when we don't have colors
-    PS1+='\u@\h \W \$ '
+    PS1='\u@\h \W \$ '
   else
-    PS1+='\u@\h \w \$ '
+    PS1='\u@\h \w \$ '
   fi
 fi
