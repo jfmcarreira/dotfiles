@@ -1,58 +1,82 @@
 #!/bin/bash
 
+
+EXCLUDE_FILE=.rsync_cluster_exclude
+
+
 run_echo()
 {
   echo $@
   eval $@
 }
 
+# Define inital variables
 
-server=zeus.itleiria.pt
-exclude_file=.rsync_cluster_exclude
 
-if [[ -z $RSYNC_CLUSTER_LOCAL_HOME ]]
-then
-  local_home=$HOME
-fi
 if [[ -z $RSYNC_CLUSTER_REMOTE_HOME ]]
 then
   echo "checking remote home using ssh... considered adding this to bashrc: export RSYNC_CLUSTER_REMOTE_HOME=value "
   export RSYNC_CLUSTER_REMOTE_HOME=$( ssh zeus.itleiria.pt "echo \$HOME" )
 fi
-
+local_home=$HOME
 remote_home=$RSYNC_CLUSTER_REMOTE_HOME
+server=zeus.itleiria.pt
+
+
+
+operation=
+args=
+
+# Use > 1 to consume two arguments per pass in the loop (e.g. each
+# argument has a corresponding value to go with it).
+# Use > 0 to consume one or more arguments per pass in the loop (e.g.
+# some arguments don't have a corresponding value to go with it such
+# as in the --default example).
+for i in "$@"
+do
+case $i in
+  push|pull)
+    operation=$i
+    ;;
+  --delete)
+    args="${args} --delete-excluded"
+    ;;
+  --host=*)
+    server="${i#*=}"
+    ;;
+  --remote-home=*)
+    remote_home="${i#*=}"
+    ;;
+  *)
+    echo "unknow option $i"
+  ;;
+esac
+shift # past argument or value
+done
+
+
 rsync_exclude=
-if [[ -f ${exclude_file} ]]
+if [[ -f ${EXCLUDE_FILE} ]]
 then
-  rsync_exclude=--exclude-from=${exclude_file}
+  rsync_exclude=--exclude-from=${EXCLUDE_FILE}
 fi
 
 args=
 command=$1
 curr_dir=$( pwd )
 remote_dir=$( echo ${curr_dir} | sed "s#${local_home}#${remote_home}#g" )
-case $command in
+case ${operation} in
     push)
       origin="${curr_dir}/"
       destination="${server}:${remote_dir}/"
-    ;;
+      ;;
     pull)
       origin="${server}:${remote_dir}/"
       destination="${curr_dir}/"
-    ;;
-    push-delete)
-      origin="${curr_dir}/"
-      destination="${server}:${remote_dir}/"
-      args="--delete-excluded"
-    ;;
-    pull-delete)
-      origin="${server}:${remote_dir}/"
-      destination="${curr_dir}/"
-      args="--delete-excluded"
-    ;;
+      ;;
     *)
       exit
-    ;;
+      ;;
 esac
 
 

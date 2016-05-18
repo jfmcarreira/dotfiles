@@ -4,7 +4,7 @@ _rsync-cluster()
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="push pull pull-delete push-delete"
+    opts="push pull --delete --host= --remote-home="
 
     if [[ ${cur} == * ]] ; then
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
