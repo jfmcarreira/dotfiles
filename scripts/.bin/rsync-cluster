@@ -61,7 +61,6 @@ then
   rsync_exclude=--exclude-from=${EXCLUDE_FILE}
 fi
 
-args=
 command=$1
 curr_dir=$( pwd )
 remote_dir=$( echo ${curr_dir} | sed "s#${local_home}#${remote_home}#g" )
