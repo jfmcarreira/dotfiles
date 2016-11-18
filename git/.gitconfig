@@ -26,7 +26,7 @@
 [url "atlas.itleiria.pt:/nfs/data/git_projects/"]
         pushInsteadOf = atlas:
 
-[url "git://anongit.kde.org/"]
+[url "http://anongit.kde.org/"]
 	insteadOf = kde:
 [url "git@git.kde.org:"] 
 	pushInsteadOf = kde: 
@@ -38,3 +38,5 @@
 
 [http]
 	sslVerify = false
+[core]
+	autocrlf = input
