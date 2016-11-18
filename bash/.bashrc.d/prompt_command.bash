@@ -14,7 +14,7 @@ function cluster_name ()
     echo -e " \[\e[0;93m\](HPC)"
   elif [ $USER == "jcarreira.it" ]
   then
-    if [ $( hostname ) == "athena" ]
+    if [ $( hostname ) == "orion" ]
     then
       echo -e " \[\e[0;96m\](IT)"
     else
