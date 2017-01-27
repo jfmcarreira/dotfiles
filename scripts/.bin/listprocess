@@ -1,0 +1,20 @@
+#!/bin/bash
+
+INPUT=$@
+FMT="pid,pgid,ni,%cpu,%mem,state,command"
+FMT=" lstart,$FMT"
+# FMT=" etime,$FMT"
+
+PIDS=$(pgrep -x ${INPUT} )
+PIDS=(${PIDS})
+
+
+for (( idx=0; idx<${#PIDS[@]}; idx++ ))
+do
+  CURR_PID=${PIDS[idx]}
+
+  PROCESS_INFO=$( ps --no-headers -f -o $FMT -p ${CURR_PID} )
+  PROCESS_PATH=$( pwdx ${CURR_PID} | awk '{print$2}' )
+
+  echo ${PROCESS_INFO} ${PROCESS_PATH}
+done

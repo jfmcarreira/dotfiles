@@ -20,3 +20,4 @@ alias stowdotfiles='stow -t ~/'
 alias ll='ls -l'
 alias fix_echo='stty echo'
 
+alias athena-bin-host='ssh -t athena.itleiria.pt screen -R gentooBinHost -d'

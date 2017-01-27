@@ -65,3 +65,6 @@ echo $@
 eval $@
 }
 export -f run_echo
+
+export WINEPREFIX=~/.wine-32
+export WINEARCH="win32"

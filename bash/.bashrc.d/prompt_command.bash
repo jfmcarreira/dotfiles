@@ -96,12 +96,8 @@ then
   then
     PS1="\n\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] "
   else
-    if [[ ! $USE_BASH_IT == true  ]]
-    then
-      PS1="\n\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
-    fi
+    [[ ! $USE_BASH_IT == true  ]] && PS1="\n\[\e[0;92m\]\u@\h$(cluster_name) \[\e[0;94m\]\w $\[\e[39m\] "
   fi
-
   alias ls='ls --color=auto'
   alias grep='grep --colour=auto'
   alias egrep='egrep --colour=auto'
