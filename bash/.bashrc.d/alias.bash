@@ -18,6 +18,10 @@ alias matlab_cmd='matlab -nosplash -nodesktop -nojvm -nodisplay'
 alias process='ps aux | grep -v grep | grep'
 alias stowdotfiles='stow -t ~/'
 alias ll='ls -l'
-alias fix_echo='stty echo'
+alias katedit='SUDO_EDITOR=kate sudoedit'
+
 
 alias athena-bin-host='ssh -t athena.itleiria.pt screen -R gentooBinHost -d'
+
+
+alias pdf2png='convert -density 300 -background white -flatten'
