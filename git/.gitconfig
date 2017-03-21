@@ -36,6 +36,9 @@
 [url "git@github.com:jfmcarreira/"]
   pushInsteadOf = github:
 
+[url "git+ssh://jfmcarreira@git.launchpad.net/"]
+  insteadof = lp:
+
 [http]
 	sslVerify = false
 [core]
