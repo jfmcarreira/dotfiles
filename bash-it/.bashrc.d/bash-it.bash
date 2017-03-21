@@ -17,4 +17,6 @@ export BASH_IT_THEME='powerline-carreira'
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
 
+export CLUSTER_INFO_USER=jcarreira.it
+
 source ${BASH_IT}/bash_it.sh
