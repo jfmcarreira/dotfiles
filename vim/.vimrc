@@ -215,3 +215,7 @@ set expandtab       " Expand TABs to spaces
 filetype plugin on
 
 let mapleader=","
+
+set laststatus=2
+set t_Co=256
+"set noshowmode 
