@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FRAME_RATE=25
+
+for i in "$@"
+do
+case $i in
+    --framerate=*)
+      FRAME_RATE="${i#*=}"
+    ;;
+    *)
+    # unknown option
+    ;;
+esac
+shift # past argument or value
+done
+
+SECOND_SCREEN_INFO=$( xrandr | grep " connected" | grep -v "primary" | awk '{print $3}' )
+
+
+RESOLUTION=${SECOND_SCREEN_INFO%%+*}
+POSITION=${SECOND_SCREEN_INFO#*+}
+
+DISPLAY_INFO=":0.0+${POSITION%%+*},${POSITION#*+}"
+
+ffplay -window_title "Second screen cast" -video_size $RESOLUTION -framerate $FRAME_RATE -f x11grab -i ${DISPLAY_INFO} -draw_mouse 1
