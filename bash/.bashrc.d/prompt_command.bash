@@ -7,7 +7,6 @@
 # Shell is non-interactive.  Be done now!
 [[ $- != *i* ]] && return
 
-return
 
 function cluster_name ()
 {

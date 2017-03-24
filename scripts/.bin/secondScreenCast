@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FRAME_RATE=25
+FRAME_RATE=15
 
 for i in "$@"
 do
