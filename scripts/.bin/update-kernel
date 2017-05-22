@@ -75,7 +75,8 @@ case $i in
     BUILD_EXTERNAL_MODULES=1
     ;;
   --help)
-    BUILD_EXTERNAL_MODULES=1
+    usage
+    exit
     ;;
   *)
     echo "unknow option $i"
