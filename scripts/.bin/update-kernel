@@ -4,6 +4,26 @@ KERNEL_PATH=/usr/src/linux
 BACKUP_KERNEL_DIR=~/kernel_configs
 MAKEOPTS="$(portageq envvar MAKEOPTS)"
 
+usage()
+{
+cat << EOF
+
+usage: update-kernel <OPTIONS>
+
+This script build/rebuilds a new or existing kernel
+
+The following <OPTIONS> are available:
+
+ General
+   --help       Show this message
+   --rebuild    Rebuild selected kernel
+   --config     Run makeconfig
+   --clean      Clean the kernel before build (by default it is not clean)
+   --modules    emerge @module-rebuild after building the kernel
+
+EOF
+}
+
 
 function configure_new_kernel()
 {
@@ -38,6 +58,7 @@ function configure_new_kernel()
 REBUILD_ONLY=0
 MAKE_MENU_CONFIG=0
 MAKE_CLEAN=0
+BUILD_EXTERNAL_MODULES=1
 for i in "$@"
 do
 case $i in
@@ -49,6 +70,12 @@ case $i in
     ;;
   --clean)
     MAKE_CLEAN=1
+    ;;
+  --modules)
+    BUILD_EXTERNAL_MODULES=1
+    ;;
+  --help)
+    BUILD_EXTERNAL_MODULES=1
     ;;
   *)
     echo "unknow option $i"
@@ -63,5 +90,6 @@ done
 
 # Build and install
 make -C ${KERNEL_PATH} $MAKEOPTS && make -C ${KERNEL_PATH} modules_install && make -C ${KERNEL_PATH} install && grub-mkconfig -o /boot/grub/grub.cfg
+[[ ${BUILD_EXTERNAL_MODULES} == 1 ]] && emerge @module-rebuild
 
 
