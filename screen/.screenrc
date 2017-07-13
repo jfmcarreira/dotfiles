@@ -1,8 +1,7 @@
-autodetach on 
-startup_message off 
 hardstatus on
-hardstatus alwayslastline
 
+# Enable mouse scrolling and scroll bar history scrolling
+termcapinfo xterm* ti@:te@
 
 #look and feel
 caption always "%{= bb}%{+b w}%h %=%{=b rw} %l %{= db} ${USER}@%H %{= dg}%c"
