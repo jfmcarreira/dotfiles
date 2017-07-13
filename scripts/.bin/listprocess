@@ -5,7 +5,7 @@ FMT="pid,pgid,ni,%cpu,%mem,state,command"
 FMT=" lstart,$FMT"
 # FMT=" etime,$FMT"
 
-PIDS=$(pgrep ${INPUT} )
+PIDS=$(pgrep -U $(whoami) ${INPUT} )
 PIDS=(${PIDS})
 
 
