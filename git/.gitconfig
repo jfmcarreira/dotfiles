@@ -44,3 +44,4 @@
 	sslVerify = false
 [core]
 	autocrlf = input
+	pager = less -x0

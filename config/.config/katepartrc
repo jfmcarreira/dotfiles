@@ -20,7 +20,7 @@ Overwrite Mode=false
 PageUp/PageDown Moves Cursor=false
 Remove Spaces=2
 ReplaceTabsDyn=true
-Show Spaces=false
+Show Spaces=true
 Show Tabs=true
 Smart Home=true
 Swap Directory=
@@ -35,9 +35,38 @@ Word Wrap Column=80
 Encoding Prober Type=1
 Fallback Encoding=ISO-8859-15
 
+[Printing][HeaderFooter]
+FooterBackground=211,211,211
+FooterBackgroundEnabled=false
+FooterEnabled=true
+FooterForeground=0,0,0
+FooterFormatCenter=
+FooterFormatLeft=
+FooterFormatRight=%U
+HeaderBackground=211,211,211
+HeaderBackgroundEnabled=false
+HeaderEnabled=true
+HeaderFooterFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+HeaderForeground=0,0,0
+HeaderFormatCenter=%f
+HeaderFormatLeft=%y
+HeaderFormatRight=%p
+
+[Printing][Layout]
+BackgroundColorEnabled=false
+BoxColor=invalid
+BoxEnabled=false
+BoxMargin=6
+BoxWidth=1
+ColorScheme=Printing
+
+[Printing][Text]
+Legend=false
+LineNumbers=false
+
 [Renderer]
 Animate Bracket Matching=false
-Schema=Normal
+Schema=KDE
 Show Indentation Lines=false
 Show Whole Bracket Expression=false
 Word Wrap Marker=false
@@ -69,7 +98,7 @@ Scroll Bar Mini Map Width=60
 Scroll Bar MiniMap=true
 Scroll Bar Preview=true
 Scroll Past End=false
-Search/Replace Flags=516
+Search/Replace Flags=140
 Show Scrollbars=1
 Show Word Count=false
 Smart Copy Cut=false
