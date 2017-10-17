@@ -1,9 +1,8 @@
 #!/bin/bash
 
 INPUT=$@
-FMT="pid,pgid,ni,%cpu,%mem,state,command"
-FMT=" lstart,$FMT"
-# FMT=" etime,$FMT"
+FMT="pid,pgid,command"
+FMT="start,$FMT"
 
 PIDS=$(pgrep -U $(whoami) ${INPUT} )
 PIDS=(${PIDS})

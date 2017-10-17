@@ -15,7 +15,6 @@ alias updatedotfiles='git -C ~/.dotfiles pull && git -C ~/.dotfiles submodule fo
 
 alias utop='htop -u jcarreira.it'
 alias matlab_cmd='matlab -nosplash -nodesktop -nojvm -nodisplay'
-alias process='ps aux | grep -v grep | grep'
 alias stowdotfiles='stow -t ~/'
 alias ls='ls -h'
 alias ll='ls -hl'
