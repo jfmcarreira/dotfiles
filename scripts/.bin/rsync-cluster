@@ -20,7 +20,7 @@ then
 fi
 local_home=$HOME
 remote_home=$RSYNC_CLUSTER_REMOTE_HOME
-server=zeus.itleiria.pt
+server=$RSYNC_CLUSTER_SERVER
 
 
 

@@ -20,6 +20,5 @@ fi
 [ -z "$PS1" ] && return
 
 stty echo
-export RSYNC_CLUSTER_REMOTE_HOME=/nfs/home/jcarreira.it
 # End
 

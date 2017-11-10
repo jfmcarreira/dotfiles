@@ -4,7 +4,8 @@ INPUT=$@
 FMT="pid,pgid,command"
 FMT="start,$FMT"
 
-PIDS=$(pgrep -U $(whoami) ${INPUT} )
+#PIDS=$(pgrep -U $(whoami) ${INPUT} )
+PIDS=$(pgrep ${INPUT} )
 PIDS=(${PIDS})
 
 
