@@ -42,16 +42,17 @@ esac
 # dircolors --print-database uses its own built-in database
 # instead of using /etc/DIR_COLORS.  Try to use the external file
 # first to take advantage of user additions.
-use_color=false
+USE_COLOR=false
 if type -P dircolors >/dev/null
 then
   # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
   LS_COLORS=
-  if [[ -f ~/.dir_colors ]]
+  custom_user_colors_file=~/.bashrc.d/dircolors
+  if [[ -f ${custom_user_colors_file} ]]
   then
     # If you have a custom file, chances are high that it's not the default.
     used_default_dircolors="no"
-    eval "$(dircolors -b ~/.dir_colors)"
+    eval "$(dircolors -b ${custom_user_colors_file})"
   elif [[ -f /etc/DIR_COLORS ]]
   then
     # People might have customized the system database.
@@ -63,7 +64,7 @@ then
   fi
   if [[ -n ${LS_COLORS:+set} ]]
   then
-    use_color=true
+    USE_COLOR=true
 
     # The majority of systems out there do not customize these files, so we
     # want to avoid always exporting the large $LS_COLORS variable.  This
@@ -86,11 +87,11 @@ else
   # Some systems (e.g. BSD & embedded) don't typically come with
   # dircolors so we need to hardcode some terminals in here.
   case ${TERM} in
-  [aEkx]term*|rxvt*|gnome*|konsole*|screen|cons25|*color) use_color=true;;
+  [aEkx]term*|rxvt*|gnome*|konsole*|screen|cons25|*color) USE_COLOR=true;;
   esac
 fi
 
-if ${use_color}
+if ${USE_COLOR}
 then
   if [[ ! $USE_BASH_IT == true  ]]
   then
