@@ -17,7 +17,7 @@ alias utop='htop -u jcarreira.it'
 alias matlab_cmd='matlab -nosplash -nodesktop -nojvm -nodisplay'
 alias stowdotfiles='stow -t ~/'
 alias ls='ls -h'
-alias ll='ls -hl'
+alias ll='ls -hvl'
 alias katedit='SUDO_EDITOR=kate sudoedit'
 
 
