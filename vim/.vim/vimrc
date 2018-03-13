@@ -181,7 +181,7 @@ augroup gentoo
   " characters at all) isn't a Unicode file, but is in the default encoding.
   " Except of course if a byte-order mark is in effect.
   autocmd BufReadPost *
-        \ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" && 
+        \ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" &&
         \    ! &bomb && search('[\x80-\xFF]','nw') == 0 && &modifiable |
         \       set fileencoding= |
         \ endif
@@ -199,10 +199,12 @@ endif
 
 " vim: set fenc=utf-8 tw=80 sw=2 sts=2 et foldmethod=marker :
 
-"colorscheme morning
+" {{{ Theme
 colors koehler
 set background=dark
+" }}}
 
+" {{{ Tabs config
 set tabstop=2       " The width of a TAB is set to 2.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
@@ -211,6 +213,7 @@ set tabstop=2       " The width of a TAB is set to 2.
 set shiftwidth=2    " Indents will have a width of 2
 set softtabstop=2   " Sets the number of columns for a TAB
 set expandtab       " Expand TABs to spaces
+" }}}
 
 filetype plugin on
 
@@ -218,7 +221,7 @@ let mapleader=","
 
 set laststatus=2
 set t_Co=256
-"set noshowmode 
+"set noshowmode
 
 let g:languagetool_jar='/usr/share/languagetool/lib/languagetool-commandline.jar'
 
