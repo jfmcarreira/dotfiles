@@ -225,3 +225,6 @@ set t_Co=256
 
 let g:languagetool_jar='/usr/share/languagetool/lib/languagetool-commandline.jar'
 
+if filereadable("/usr/share/vim/addons/plugin/powerline.vim")
+  source /usr/share/vim/addons/plugin/powerline.vim
+endif
