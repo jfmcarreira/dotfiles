@@ -4,8 +4,6 @@
 # Shell is non-interactive.  Be done now!
 [[ $- != *i* ]] && return
 
-return
-
 USE_BASH_IT=true
 
 # bash-it location
