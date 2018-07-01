@@ -1,7 +1,7 @@
 [user]
 	email = jfmcarreira@gmail.com
 	name = Joao Carreira
-	signingkey = F950645C87D1EFEFD89F847C1D25449A2B2A89DE
+	signingkey = 47EC190BD2F25C46D804B75CA1A2A014A98C9EA3
 
 [push]
 	default = simple
