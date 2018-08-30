@@ -1,10 +1,21 @@
+[core]
+	autocrlf = input
+	pager = less -x0
+	editor = vim
+
+[diff]
+	tool = vimdiff
+
+[push]
+	default = simple
+
 [user]
 	email = jfmcarreira@gmail.com
 	name = Joao Carreira
 	signingkey = F950645C87D1EFEFD89F847C1D25449A2B2A89DE
 
-[push]
-	default = simple
+[http]
+	sslVerify = false
 
 [color]
 	ui = auto
@@ -17,20 +28,19 @@
 	insteadOf = https://chromium.googlesource.com/a/
 
 [url "zeus.itleiria.pt:~/GITServer/"]
-  insteadOf = itcluster:
+	insteadOf = itcluster:
 [url "zeus.itleiria.pt:~/GITServer/"]
-  pushInsteadOf = itcluster:
-
+	pushInsteadOf = itcluster:
 
 [url "atlas.itleiria.pt:/nfs/data/git_projects/"]
-        insteadOf = atlas:
+	insteadOf = atlas:
 [url "atlas.itleiria.pt:/nfs/data/git_projects/"]
-        pushInsteadOf = atlas:
+	pushInsteadOf = atlas:
 
 [url "http://anongit.kde.org/"]
 	insteadOf = kde:
-[url "git@git.kde.org:"] 
-	pushInsteadOf = kde: 
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
 
 [url "git@github.com:jfmcarreira/"]
   insteadOf = github:
@@ -40,8 +50,4 @@
 [url "git+ssh://jfmcarreira@git.launchpad.net/"]
   insteadof = lp:
 
-[http]
-	sslVerify = false
-[core]
-	autocrlf = input
-	pager = less -x0
+
