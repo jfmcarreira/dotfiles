@@ -3,11 +3,6 @@
 # Shell is non-interactive.  Be done now!
 [[ $- != *i* ]] && return
 
-if [[ ! -z $( pwd | grep "/nfs" ) ]]
-then
-  return
-fi
-
 which powerline-daemon >& /dev/null
 if [[ $? -eq 0  ]]; then
   powerline-daemon -q
