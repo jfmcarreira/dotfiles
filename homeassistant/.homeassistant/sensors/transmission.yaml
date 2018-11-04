@@ -1,0 +1,11 @@
+- platform: transmission
+  name: Transmission
+  host: !secret transmission_host
+  username: !secret transmission_user
+  password: !secret transmission_pass
+  monitored_variables:
+    - 'current_status'
+    - 'download_speed'
+    - 'upload_speed'
+    - 'active_torrents'
+    - 'total_torrents'

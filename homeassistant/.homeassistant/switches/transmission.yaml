@@ -1,0 +1,5 @@
+- platform: transmission
+  name: Transmission
+  host: !secret transmission_host
+  username: !secret transmission_user
+  password: !secret transmission_pass

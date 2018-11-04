@@ -1,0 +1,120 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 39.656470
+  longitude: -8.822140
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Lisbon
+  # Customization file
+  customize: !include include/customize.yaml
+
+## Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+  themes: !include include/themes.yaml
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+## Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Cloud
+cloud:
+
+# Track the sun
+sun:
+  name: sun_tracker
+
+# MQTT
+mqtt:
+  username: joaoc
+  password:  9j98u8kuj
+  broker: 192.168.1.6
+  port: 1883
+
+
+
+# Weather prediction
+weather:
+  - platform: darksky
+    name: Weather Forecast
+    api_key: 3ab68555ff639f4d9a9d375672ce73a2
+
+
+
+wake_on_lan: # enables `wake_on_lan` domain
+
+
+device_tracker:
+  - platform: ping
+    hosts:
+      hostone: 192.168.1.11
+  #- platform: nmap_tracker
+    #home_interval: 10
+    #new_device_defaults:
+      #track_new_devices: False
+    #hosts: 192.168.1.0/24
+
+notify:
+  - platform: webostv
+    host: 192.168.1.3
+    name: Living Room TV
+    filename: webostv.conf
+
+climate:
+  - platform: generic_thermostat
+    name: Home
+    heater: switch.heating_state
+    target_sensor: sensor.living_room_temp
+    min_temp: 10
+    max_temp: 35
+    min_cycle_duration:
+      seconds: 5
+    initial_operation_mode: "off"
+    cold_tolerance: 2
+    hot_tolerance: 0
+    #away_temp: 15
+
+
+media_player: !include include/media_players.yaml
+scene: !include include/scenes.yaml
+group: !include include/groups.yaml
+
+light:  !include_dir_merge_list lights
+sensor: !include_dir_merge_list sensors
+switch: !include_dir_merge_list switches
+script: !include_dir_merge_list script
+automation: !include_dir_merge_list automation

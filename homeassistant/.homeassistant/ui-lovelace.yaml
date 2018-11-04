@@ -1,0 +1,62 @@
+title: J&B Home
+
+# Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
+background: center / cover no-repeat url("/background.png") fixed
+## Exclude entities from "Unused entities" view
+#excluded_entities:
+  #- weblink.router
+views:
+  - icon: mdi:home-assistant
+    title: Home
+    # Optional unique id for direct access /lovelace/${id}
+    id: home
+    # Optional background (overwrites the global background).
+    #background: radial-gradient(crimson, skyblue)
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    #theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      - type: weather-forecast
+        entity: weather.weather_forecast
+
+      - type: media-control
+        entity: media_player.media_center
+      #- type: media-control
+        #entity: media_player.living_room_tv
+      #- type: media-control
+        #entity: media_player.mediaroom_192168110
+      #- type: media-control
+        #entity: media_player.tv_kodi
+
+      - type: glance
+        title: People at Home
+        entities:
+        - device_tracker.joao_phone
+
+      - type: entities
+        show_header_toggle: true
+        tile: Heating
+        entities:
+        - entity: climate.home
+          name: Home Heating
+
+
+
+      - type: glance
+        title: Transmission
+        entities:
+        - entity: switch.transmission
+          name: ON/OFF
+        - entity: sensor.transmission_status
+          name: Status
+        #- entity: sensor.transmission_total_torrents
+        #  name: Torrents
+        - entity: sensor.transmission_active_torrents
+          #name: Active
+          name: Torrents
+        - entity: sensor.transmission_down_speed
+          name: Down speed
+        - entity: sensor.transmission_up_speed
+          name: Up speed
+
+

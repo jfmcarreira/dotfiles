@@ -1,0 +1,11 @@
+- platform: mqtt
+  name: Heating State
+  #state_topic: "home/heating/state"
+  command_topic: "home/heating/state"
+  payload_on: "ON"
+  payload_off: "OFF"
+  state_on: "ON"
+  state_off: "OFF"
+  optimistic: false
+  qos: 0
+  retain: true
