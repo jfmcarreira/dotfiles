@@ -13,8 +13,8 @@
   #rgb_command_topic: "living_room/awox1/color/set"
 
   #state_value_template: "{{ value_json.state }}"
-  brightness_value_template: "{{ value_json.brightness }}"
-  color_temp_value_template: "{{ value_json.temperature }}"
+  #brightness_value_template: "{{ value_json.brightness }}"
+  #color_temp_value_template: "{{ value_json.temperature }}"
   #rgb_value_template: "{{ value_json.rgb | join(',') }}"
 
   brightness_scale: 100

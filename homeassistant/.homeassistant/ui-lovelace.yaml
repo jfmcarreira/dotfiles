@@ -26,7 +26,9 @@ views:
       - type: glance
         title: People at Home
         entities:
-          - device_tracker.joao_phone
+          - entity: device_tracker.joao_phone
+            name: João
+
 
       - type: vertical-stack
         cards:
@@ -60,14 +62,6 @@ views:
         title: Controlo Temperatura
         entities:
           - climate.heating
-          - type: sensor
-            title: Living Room
-            entity: sensor.living_room_temp
-            height: 60
-            icon: mdi:thermometer
-            line_width: 8
-            hours_to_show: 48h
-            line_color: "#3498db"
 
   - icon: mdi:server
     title: Server

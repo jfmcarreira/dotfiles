@@ -82,7 +82,7 @@ wake_on_lan: # enables `wake_on_lan` domain
 device_tracker:
   - platform: ping
     hosts:
-      hostone: 192.168.1.11
+      hostone: 192.168.1.12
   #- platform: nmap_tracker
     #home_interval: 10
     #new_device_defaults:
