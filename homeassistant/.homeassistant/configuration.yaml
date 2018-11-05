@@ -18,6 +18,7 @@ homeassistant:
 
 # Enables the frontend
 frontend:
+  javascript_version: auto
   themes: !include include/themes.yaml
 
 # Enables configuration UI
@@ -96,7 +97,7 @@ notify:
 
 climate:
   - platform: generic_thermostat
-    name: Home
+    name: Heating
     heater: switch.heating_state
     target_sensor: sensor.living_room_temp
     min_temp: 10
@@ -104,8 +105,10 @@ climate:
     min_cycle_duration:
       seconds: 5
     initial_operation_mode: "off"
-    cold_tolerance: 2
+    cold_tolerance: 1
     hot_tolerance: 0
+    keep_alive:
+      minutes: 3
     #away_temp: 15
 
 

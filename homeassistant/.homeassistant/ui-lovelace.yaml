@@ -1,26 +1,38 @@
 title: J&B Home
 
+# Include external resources
+resources:
+  - url: /local/custom-lovelace/gauge-card/?v=1
+    type: js
+
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 background: center / cover no-repeat url("/background.png") fixed
+# Each view can have a different theme applied. Theme should be defined in the frontend.
+theme: dark-mode
 ## Exclude entities from "Unused entities" view
 #excluded_entities:
   #- weblink.router
+
 views:
   - icon: mdi:home-assistant
     title: Home
     # Optional unique id for direct access /lovelace/${id}
     id: home
-    # Optional background (overwrites the global background).
-    #background: radial-gradient(crimson, skyblue)
-    # Each view can have a different theme applied. Theme should be defined in the frontend.
-    #theme: dark-mode
     # The cards to show on this view.
     cards:
       - type: weather-forecast
         entity: weather.weather_forecast
 
-      - type: media-control
-        entity: media_player.media_center
+      - type: glance
+        title: People at Home
+        entities:
+          - device_tracker.joao_phone
+
+      - type: vertical-stack
+        cards:
+        - type: media-control
+          entity: media_player.media_center
+
       #- type: media-control
         #entity: media_player.living_room_tv
       #- type: media-control
@@ -28,22 +40,42 @@ views:
       #- type: media-control
         #entity: media_player.tv_kodi
 
-      - type: glance
-        title: People at Home
-        entities:
-        - device_tracker.joao_phone
+      #- type: picture-glance
+        #title: Living Room
+        #entities:
+          #- light.living_room_lights
+          #- light.living_room_rgb
+        #image: /local/living_room_rgb_on.jpg
+
+      - type: picture-entity
+        name: Living Room Table Light
+        entity: light.living_room_rgb
+        state_image:
+          "on": /local/living_room_rgb_on.jpg
+          "off": /local/living_room_rgb_off.jpg
+        tap_action: more-info
+        hold_action: toggle
 
       - type: entities
-        show_header_toggle: true
-        tile: Heating
+        title: Controlo Temperatura
         entities:
-        - entity: climate.home
-          name: Home Heating
+          - climate.heating
+          - type: sensor
+            title: Living Room
+            entity: sensor.living_room_temp
+            height: 60
+            icon: mdi:thermometer
+            line_width: 8
+            hours_to_show: 48h
+            line_color: "#3498db"
 
-
-
+  - icon: mdi:server
+    title: Server
+    id: server
+    # The cards to show on this view.
+    cards:
       - type: glance
-        title: Transmission
+        title: Transmission Status
         entities:
         - entity: switch.transmission
           name: ON/OFF
@@ -58,5 +90,3 @@ views:
           name: Down speed
         - entity: sensor.transmission_up_speed
           name: Up speed
-
-
