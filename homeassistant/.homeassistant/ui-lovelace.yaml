@@ -84,3 +84,13 @@ views:
           name: Down speed
         - entity: sensor.transmission_up_speed
           name: Up speed
+
+      - type: entities
+        title: Automations
+        entities:
+          - group.all_automations
+          - automation.heating_state
+          - automation.presence_light_get_home
+          - automation.presence_light_tv_off
+          - automation.led_strip_based_on_tv_source_netflix
+          - automation.led_strip_based_on_tv_source_kodi
