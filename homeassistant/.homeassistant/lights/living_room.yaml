@@ -9,8 +9,8 @@
   color_temp_state_topic: "living_room/awox1/temperature/status"
   color_temp_command_topic: "living_room/awox1/temperature/set"
 
-  #rgb_state_topic: "living_room/awox1/color/status"
-  #rgb_command_topic: "living_room/awox1/color/set"
+  rgb_state_topic: "living_room/awox1/color/status"
+  rgb_command_topic: "living_room/awox1/color/set"
 
   #state_value_template: "{{ value_json.state }}"
   #brightness_value_template: "{{ value_json.brightness }}"
@@ -20,7 +20,7 @@
   brightness_scale: 100
 
   qos: 0
-  on_command_type: first
+  on_command_type: brightness
   payload_on: "True"
   payload_off: "False"
   optimistic: false

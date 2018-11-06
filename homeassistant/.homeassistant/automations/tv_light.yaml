@@ -1,0 +1,34 @@
+#- alias: "Media player paused/stopped"
+  #trigger:
+    #- platform: state
+      #entity_id: media_player.media_center
+      #from: 'playing'
+      #to: 'idle'
+  #condition:
+    #- condition: state
+      #entity_id: sun.sun
+      #state: 'below_horizon'
+    #- condition: state
+      #entity_id: light.tv_leds
+      #state: 'on'
+  #action:
+      #service: scene.turn_on
+      #entity_id: scene.livingroom_normal
+
+#- alias: "Media player playing"
+  #trigger:
+    #- platform: state
+      #entity_id: media_player.media_center
+      #to: 'playing'
+      #from: 'idle'
+  #condition:
+    #- condition: state
+      #entity_id: sun.sun
+      #state: 'below_horizon'
+    #- condition: state
+      #entity_id: light.tv_leds
+      #state: 'on'
+  #action:
+      #service: scene.turn_on
+      #entity_id: scene.livingroom_dim
+

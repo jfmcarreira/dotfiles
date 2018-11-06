@@ -1,135 +1,89 @@
-- alias: Heating state
+- id: led_strip_tv_source_netfilx_aut
+  alias: "Led strip based on TV source Netflix"
   trigger:
-    platform: state
-    entity_id:  switch.heating_state
-  action:
-    service: notify.living_room_tv
-    data_template:
-      message: >
-        {% if is_state('switch.heating_state', 'on') %}
-          Heating is ON
-        {% else %}
-          Heating is OFF
-        {% endif %}
-
-- alias: "Led strip based on TV source Netflix"
-  trigger:
-    platform: state
+  - platform: state
     entity_id: sensor.living_room_tv_source
     to: 'Netflix'
   condition:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-    - condition: state
-      entity_id: media_player.living_room_tv
-      state: 'playing'
-    - condition: state
-      entity_id: light.tv_leds
-      state: 'on'
+  - condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  - condition: state
+    entity_id: media_player.living_room_tv
+    state: 'playing'
+  - condition: state
+    entity_id: light.tv_leds
+    state: 'on'
   action:
-    service: light.turn_on
+  - service: light.turn_on
     entity_id: light.tv_leds
     data_template:
       brightness: 255
       rgb_color: ['0','255','0']
 
-- alias: "Led strip based on TV source Kodi"
+- id: led_strip_tv_source_kodi_aut
+  alias: "Led strip based on TV source Kodi"
   trigger:
-    platform: state
+  - platform: state
     entity_id: sensor.living_room_tv_source
     to: 'RaspberryPi'
   condition:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-    - condition: state
-      entity_id: media_player.living_room_tv
-      state: 'playing'
-    - condition: state
-      entity_id: light.tv_leds
-      state: 'on'
+  - condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  - condition: state
+    entity_id: media_player.living_room_tv
+    state: 'playing'
+  - condition: state
+    entity_id: light.tv_leds
+    state: 'on'
   action:
-    service: light.turn_on
+  - service: light.turn_on
     entity_id: light.tv_leds
     data_template:
       brightness: 255
       rgb_color: ['0','0','255']
 
-
-- alias: "Presence light get home"
+- id: presence_light_get_home
+  alias: "Presence light get home"
   trigger:
-    platform: state
+  - platform: state
     entity_id: device_tracker.joao_phone
     to: 'home'
   condition:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-    - condition: state
-      entity_id:  light.living_room_lights
-      state: 'off'
+  - condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  - condition: state
+    entity_id:  light.living_room_lights
+    state: 'off'
   action:
-    - service: light.turn_on
-      entity_id: light.living_room_rgb
-      data_template:
-        brightness: 180
-    - delay: 00:00:30
-    - service: light.turn_off
-      entity_id: light.living_room_rgb
+  - service: light.turn_on
+    entity_id: light.living_room_rgb
+    data_template:
+      brightness: 180
+  - delay: 00:00:30
+  - service: light.turn_off
+    entity_id: light.living_room_rgb
 
-- alias: "Presence light TV off"
+- id: presence_light_tv_off
+  alias: "Presence light TV off"
   trigger:
-    platform: state
+  - platform: state
     entity_id: media_player.media_center
     to: 'off'
   condition:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-    - condition: state
-      entity_id:  light.living_room_lights
-      state: 'off'
+  - condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  - condition: state
+    entity_id:  light.living_room_lights
+    state: 'off'
   action:
-    - service: light.turn_on
-      entity_id: light.living_room_rgb
-      data_template:
-        brightness: 180
-    - delay: 00:00:30
-    - service: light.turn_off
-      entity_id: light.living_room_rgb
-
-
-#- alias: "Media player paused/stopped"
-  #trigger:
-    #- platform: state
-      #entity_id: media_player.media_center
-      #from: 'playing'
-      #to: 'idle'
-  #condition:
-    #- condition: state
-      #entity_id: sun.sun
-      #state: 'below_horizon'
-    #- condition: state
-      #entity_id: light.tv_leds
-      #state: 'on'
-  #action:
-      #service: scene.turn_on
-      #entity_id: scene.livingroom_normal
-
-#- alias: "Media player playing"
-  #trigger:
-    #- platform: state
-      #entity_id: media_player.media_center
-      #to: 'playing'
-      #from: 'idle'
-  #condition:
-    #- condition: state
-      #entity_id: sun.sun
-      #state: 'below_horizon'
-    #- condition: state
-      #entity_id: light.tv_leds
-      #state: 'on'
-  #action:
-      #service: scene.turn_on
-      #entity_id: scene.livingroom_dim
+  - service: light.turn_on
+    entity_id: light.living_room_rgb
+    data_template:
+      brightness: 180
+  - delay: 00:00:30
+  - service: light.turn_off
+    entity_id: light.living_room_rgb

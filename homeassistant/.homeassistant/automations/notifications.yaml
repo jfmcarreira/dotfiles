@@ -1,0 +1,15 @@
+#- id: heating_state_aut
+- alias: Heating state
+  trigger:
+  - platform: state
+    entity_id:  switch.heating_state
+  action:
+  - service: notify.living_room_tv
+    data_template:
+      message: >
+        {% if is_state('switch.heating_state', 'on') %}
+          Heating is ON
+        {% else %}
+          Heating is OFF
+        {% endif %}
+
