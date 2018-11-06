@@ -11,7 +11,7 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Lisbon
   # Customization file
-  customize: !include include/customize.yaml
+  customize: !include customize.yaml
 
 ## Show links to resources in log and frontend
 #introduction:
@@ -19,7 +19,7 @@ homeassistant:
 # Enables the frontend
 frontend:
   javascript_version: auto
-  themes: !include include/themes.yaml
+  themes: !include themes.yaml
 
 # Enables configuration UI
 config:
@@ -107,13 +107,12 @@ climate:
       minutes: 3
 
 
-media_player: !include include/media_players.yaml
-scene: !include include/scenes.yaml
-group: !include include/groups.yaml
+media_player: !include media_players.yaml
+scene: !include scenes.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
 
 light:  !include_dir_merge_list lights
 sensor: !include_dir_merge_list sensors
 switch: !include_dir_merge_list switches
 script: !include_dir_merge_list script
-automation: !include automations.yaml
-automation: !include_dir_merge_list automation
