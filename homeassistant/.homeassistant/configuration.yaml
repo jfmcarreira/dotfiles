@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 39.656470
-  longitude: -8.822140
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 0
   # metric for Metric, imperial for Imperial
@@ -61,11 +61,9 @@ logbook:
 map:
 
 # Cloud
-cloud:
+#cloud:
 
-# Track the sun
-sun:
-  name: sun_tracker
+wake_on_lan: # enables `wake_on_lan` domain
 
 # MQTT
 mqtt:
@@ -74,16 +72,14 @@ mqtt:
   broker: !secret mqtt_ip
   port: !secret mqtt_port
 
+# Show notifications
+notify:
+  - platform: webostv
+    host: !secret living_room_ip
+    name: Living Room TV
+    filename: webostv.conf
 
-
-# Weather prediction
-weather:
-  - platform: darksky
-    name: Weather Forecast
-    api_key: !secret weather_api_key
-
-wake_on_lan: # enables `wake_on_lan` domain
-
+# Track devices
 device_tracker:
   - platform: ping
     new_device_defaults:
@@ -95,11 +91,22 @@ device_tracker:
       joao_phone: !secret joao_phone_ip
       bianca_phone: !secret bianca_phone_ip
 
-notify:
-  - platform: webostv
-    host: !secret living_room_ip
-    name: Living Room TV
-    filename: webostv.conf
+zone:
+  - name: ESTG
+    latitude: !secret estg_latitude
+    longitude: !secret estg_longitude
+    radius: 250
+    icon: mdi:school
+
+# Track the sun
+sun:
+  name: sun_tracker
+
+# Weather prediction
+weather:
+  - platform: darksky
+    name: Weather Forecast
+    api_key: !secret weather_api_key
 
 climate:
   - platform: generic_thermostat
