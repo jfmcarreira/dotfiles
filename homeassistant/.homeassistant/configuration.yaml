@@ -67,8 +67,8 @@ wake_on_lan: # enables `wake_on_lan` domain
 
 # MQTT
 mqtt:
-  username: joaoc
-  password:  9j98u8kuj
+  username: !secret mqtt_user
+  password:  !secret mqtt_password
   broker: !secret mqtt_ip
   port: !secret mqtt_port
 
