@@ -26,8 +26,8 @@ views:
       - type: glance
         title: People at Home
         entities:
-          - entity: device_tracker.joao_phone
-            name: João
+          - entity: group.joao
+          - entity: group.bianca
 
 
       - type: vertical-stack

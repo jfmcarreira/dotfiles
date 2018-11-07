@@ -1,33 +1,14 @@
-default_view:
-  view: yes
-  icon: mdi:home
-  entities:
-    - weather.weather_forecast
-    - media_player.media_center
-    - light.tv_leds
-    - climate.home
-    - group.tracked_devices
-
-server_info:
-  view: yes
-  name: Server
-  entities:
-  - group.transmission
-
-
-tracked_devices:
-  view: no
-  name: Devices
+joao:
+  name: João
+  icon: mdi:human-male
   entities:
   - device_tracker.joao_phone
+  - device_tracker.pegasus
 
-transmission:
-  view: no
-  name: Transmission
+bianca:
+  name: Bianca
+  icon: mdi:human-female
   entities:
-  - sensor.transmission_status
-  - sensor.transmission_total_torrents
-  - sensor.transmission_active_torrents
-  - sensor.transmission_down_speed
-  - sensor.transmission_up_speed
-  - switch.transmission
+  - device_tracker.bianca_phone
+
+all_persons: group.joao, group.bianca
