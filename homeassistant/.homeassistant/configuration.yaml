@@ -90,6 +90,15 @@ device_tracker:
       pegasus: !secret pegasus_ip
       joao_phone: !secret joao_phone_ip
       bianca_phone: !secret bianca_phone_ip
+  - platform: owntracks
+    new_device_defaults:
+      track_new_devices: True
+      hide_if_away: False
+    max_gps_accuracy: 200
+    waypoints: false
+    mqtt_topic: "owntracks/#"
+    events_only: true
+
 
 zone:
   - name: ESTG

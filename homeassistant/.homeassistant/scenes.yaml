@@ -4,6 +4,7 @@
       state: on
       transition: 2
       brightness_pct: 100
+
 - name: Livingroom dim
   entities:
     light.tv_leds:

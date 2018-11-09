@@ -1,10 +1,5 @@
 # Living room temperature
-#- platform: command_line
-  #name: Living Room Temp
-  #command: "/srv/configs/scripts/readRoomTemp.py"
-  ## If errors occur, remove degree symbol below
-  ##unit_of_measurement: "°C"
 - platform: mqtt
   name: Living Room Temp
   state_topic: "home/temperature/living_room"
-  #unit_of_measurement: 'ºC'
+  unit_of_measurement: 'ºC'

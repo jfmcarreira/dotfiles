@@ -29,25 +29,10 @@ views:
           - entity: group.joao
           - entity: group.bianca
 
-
       - type: vertical-stack
         cards:
         - type: media-control
           entity: media_player.media_center
-
-      #- type: media-control
-        #entity: media_player.living_room_tv
-      #- type: media-control
-        #entity: media_player.mediaroom_192168110
-      #- type: media-control
-        #entity: media_player.tv_kodi
-
-      #- type: picture-glance
-        #title: Living Room
-        #entities:
-          #- light.living_room_lights
-          #- light.living_room_rgb
-        #image: /local/living_room_rgb_on.jpg
 
       - type: picture-entity
         name: Living Room Table Light
@@ -88,9 +73,5 @@ views:
       - type: entities
         title: Automations
         entities:
+          - group.all_switches
           - group.all_automations
-          - automation.heating_state
-          - automation.presence_light_get_home
-          - automation.presence_light_tv_off
-          - automation.led_strip_based_on_tv_source_netflix
-          - automation.led_strip_based_on_tv_source_kodi
