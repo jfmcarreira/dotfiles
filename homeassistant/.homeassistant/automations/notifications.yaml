@@ -1,5 +1,5 @@
 #- id: heating_state_aut
-- alias: Heating state
+- alias: Notify Heating state
   trigger:
   - platform: state
     entity_id:  switch.heating_state
