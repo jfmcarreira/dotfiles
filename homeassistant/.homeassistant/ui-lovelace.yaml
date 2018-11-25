@@ -29,24 +29,27 @@ views:
           - entity: group.joao
           - entity: group.bianca
 
-      - type: vertical-stack
-        cards:
-        - type: media-control
-          entity: media_player.media_center
+      - type: media-control
+        entity: media_player.media_center
 
-      - type: picture-entity
-        name: Living Room Table Light
+      #- type: picture-entity
+        #name: Living Room Table Light
+        #entity: light.living_room_rgb
+        #state_image:
+          #"don": /local/living_room_rgb_on.jpg
+          #"off": /local/living_room_rgb_off.jpg
+        #tap_action: more-info
+        #hold_action: toggle
+
+      - type: light
         entity: light.living_room_rgb
-        state_image:
-          "on": /local/living_room_rgb_on.jpg
-          "off": /local/living_room_rgb_off.jpg
-        tap_action: more-info
-        hold_action: toggle
 
-      - type: entities
-        title: Controlo Temperatura
-        entities:
-          - climate.heating
+      - type: thermostat
+        entity: climate.heating
+      #- type: entities
+        #title: Controlo Temperatura
+        #entities:
+          #- climate.heating
 
   - icon: mdi:server
     title: Server

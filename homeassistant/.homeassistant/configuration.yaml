@@ -27,6 +27,7 @@ config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
+  base_url: !secret server_address
   server_port: !secret server_port
   trusted_proxies:
     - 127.0.0.1
@@ -38,7 +39,6 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 3
   use_x_forwarded_for: true
-
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -72,6 +72,7 @@ logbook:
 # Enables a map showing the location of tracked devices
 map:
 
+
 # Cloud
 #cloud:
 
@@ -94,8 +95,7 @@ notify:
 # Track devices
 device_tracker:
   - platform: ping
-    new_device_defaults:
-      track_new_devices: False
+    track_new_devices: True
     interval_seconds: 15
     consider_home: 30
     hosts:
@@ -103,13 +103,10 @@ device_tracker:
       joao_phone: !secret joao_phone_ip
       bianca_phone: !secret bianca_phone_ip
   - platform: owntracks
-    new_device_defaults:
-      track_new_devices: True
-      hide_if_away: False
+    track_new_devices: True
     max_gps_accuracy: 200
-    waypoints: false
     mqtt_topic: "owntracks/#"
-    events_only: true
+    waypoints: false
 
 
 zone:
