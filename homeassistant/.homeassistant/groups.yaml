@@ -2,10 +2,9 @@ joao:
   name: João
   icon: mdi:human-male
   entities:
-  - device_tracker.joao_huawei_gps
-  - sensor.joao_huawei_battery
   - device_tracker.joao_phone
   - device_tracker.pegasus
+  - sensor.joao_huawei_battery
 
 bianca:
   name: Bianca
