@@ -1,0 +1,154 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Lisbon
+  # Customization file
+  customize: !include customize.yaml
+
+## Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+  javascript_version: auto
+  themes: !include themes.yaml
+
+# Enables configuration UI
+config:
+
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: !secret server_address
+  server_port: !secret server_port
+  trusted_proxies:
+    - 127.0.0.1
+    - ::1
+  trusted_networks:
+    - !secret pegasus_ip
+    - !secret bianca_phone_ip
+    - !secret joao_phone_ip
+  ip_ban_enabled: true
+  login_attempts_threshold: 3
+  use_x_forwarded_for: true
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+## Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Enables support for tracking state changes over time
+history:
+  exclude:
+    domains:
+      - device_tracker
+    entities:
+      - group.all_devices
+      - group.all_persons
+      - group.joao
+      - group.bianca
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+
+# Cloud
+#cloud:
+
+wake_on_lan: # enables `wake_on_lan` domain
+
+# MQTT
+mqtt:
+  username: !secret mqtt_user
+  password:  !secret mqtt_password
+  broker: !secret mqtt_ip
+  port: !secret mqtt_port
+
+# Show notifications
+notify:
+  - platform: webostv
+    host: !secret living_room_ip
+    name: Living Room TV
+    filename: webostv.conf
+
+# Track devices
+device_tracker:
+  - platform: ping
+    track_new_devices: True
+    interval_seconds: 15
+    consider_home: 30
+    hosts:
+      pegasus: !secret pegasus_ip
+      joao_phone: !secret joao_phone_ip
+      bianca_phone: !secret bianca_phone_ip
+  - platform: owntracks
+    track_new_devices: True
+    max_gps_accuracy: 200
+    mqtt_topic: "owntracks/#"
+    waypoints: false
+
+
+zone:
+  - name: ESTG
+    latitude: !secret estg_latitude
+    longitude: !secret estg_longitude
+    radius: 250
+    icon: mdi:school
+
+# Track the sun
+sun:
+  name: sun_tracker
+
+# Weather prediction
+weather:
+  - platform: darksky
+    name: Weather Forecast
+    api_key: !secret weather_api_key
+
+climate:
+  - platform: generic_thermostat
+    name: Heating
+    heater: switch.heating_state
+    target_sensor: sensor.living_room_temp
+    min_temp: 10
+    max_temp: 25
+    min_cycle_duration:
+      seconds: 5
+    initial_operation_mode: "off"
+    cold_tolerance: 0.5
+    hot_tolerance: 0
+    keep_alive:
+      minutes: 3
+
+
+media_player: !include media_players.yaml
+scene: !include scenes.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+
+light:  !include_dir_merge_list lights
+sensor: !include_dir_merge_list sensors
+switch: !include_dir_merge_list switches
+script: !include_dir_merge_list script
+automation old: !include_dir_merge_list automations

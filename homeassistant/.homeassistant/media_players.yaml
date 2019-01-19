@@ -1,0 +1,90 @@
+# LGTV
+- platform: webostv
+  host: !secret living_room_ip
+  name: Living Room TV
+  timeout: 5
+  filename: webostv.conf
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret living_room_tv_mac
+  customize:
+    sources:
+      - MEO
+      - Kodi
+      - YouTube
+      - Netflix
+
+# Meo box
+- platform: mediaroom
+  name: Meo Box
+  host: !secret meo_box_ip
+  optimistic: true
+
+# Kodi
+- platform: kodi
+  name: TV Kodi
+  host: !secret kodi_ip
+  port: 8080
+  username: !secret kodi_user
+  password: !secret kodi_pass
+
+#Universal
+- platform: universal
+  name: Media Center
+  children:
+    - media_player.mediaroom_192168110
+    - media_player.tv_kodi
+    - media_player.living_room_tv
+  state_template: >
+    {% if is_state('media_player.living_room_tv', 'off') %}
+      off
+    {% else %}
+      {% if is_state('sensor.living_room_tv_source', "Kodi") %}
+        {{ states('media_player.tv_kodi') }}
+      {% elif is_state('sensor.living_room_tv_source', "MEO") %}
+        {{ states('media_player.mediaroom_192168110') }}
+      {% elif is_state('sensor.living_room_tv_source', "Netflix") %}
+        {{ states('media_player.living_room_tv') }}
+      {% else %}
+        {{ states('media_player.living_room_tv') }}
+      {% endif %}
+    {% endif %}
+  commands:
+    turn_on:
+      service: media_player.turn_on
+      data:
+        entity_id: media_player.living_room_tv
+    turn_off:
+      service: media_player.turn_off
+      data:
+        entity_id: media_player.living_room_tv
+    volume_up:
+      service: media_player.volume_up
+      data:
+        entity_id: media_player.living_room_tv
+    volume_down:
+      service: media_player.volume_down
+      data:
+        entity_id: media_player.living_room_tv
+    volume_mute:
+      service: media_player.volume_mute
+      data:
+        entity_id: media_player.living_room_tv
+    select_source:
+      service: media_player.select_source
+      data_template:
+        entity_id: media_player.living_room_tv
+        source: '{{ source }}'
+    volume_set:
+      service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_tv
+        volume_level: '{{ volume_level }}'
+  attributes:
+    is_volume_muted: media_player.living_room_tv|is_volume_muted
+    volume_level: media_player.living_room_tv|volume_level
+    source: media_player.living_room_tv|source
+    source_list: media_player.living_room_tv|source_list
+
+

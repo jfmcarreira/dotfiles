@@ -1,0 +1,80 @@
+title: J&B Home
+
+# Include external resources
+resources:
+  - url: /local/custom-lovelace/gauge-card/?v=1
+    type: js
+
+# Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
+background: center / cover no-repeat url("/background.png") fixed
+# Each view can have a different theme applied. Theme should be defined in the frontend.
+theme: dark-mode
+## Exclude entities from "Unused entities" view
+#excluded_entities:
+  #- weblink.router
+
+views:
+  - icon: mdi:home-assistant
+    title: Home
+    # Optional unique id for direct access /lovelace/${id}
+    id: home
+    # The cards to show on this view.
+    cards:
+      - type: weather-forecast
+        entity: weather.weather_forecast
+
+      - type: glance
+        title: People at Home
+        entities:
+          - entity: group.joao
+          - entity: group.bianca
+
+      - type: media-control
+        entity: media_player.media_center
+
+      #- type: picture-entity
+        #name: Living Room Table Light
+        #entity: light.living_room_rgb
+        #state_image:
+          #"don": /local/living_room_rgb_on.jpg
+          #"off": /local/living_room_rgb_off.jpg
+        #tap_action: more-info
+        #hold_action: toggle
+
+      - type: light
+        entity: light.living_room_rgb
+
+      - type: thermostat
+        entity: climate.heating
+      #- type: entities
+        #title: Controlo Temperatura
+        #entities:
+          #- climate.heating
+
+  - icon: mdi:server
+    title: Server
+    id: server
+    # The cards to show on this view.
+    cards:
+      - type: glance
+        title: Transmission Status
+        entities:
+        - entity: switch.transmission
+          name: ON/OFF
+        - entity: sensor.transmission_status
+          name: Status
+        #- entity: sensor.transmission_total_torrents
+        #  name: Torrents
+        - entity: sensor.transmission_active_torrents
+          #name: Active
+          name: Torrents
+        - entity: sensor.transmission_down_speed
+          name: Down speed
+        - entity: sensor.transmission_up_speed
+          name: Up speed
+
+      - type: entities
+        title: Automations
+        entities:
+          - group.all_switches
+          - group.all_automations

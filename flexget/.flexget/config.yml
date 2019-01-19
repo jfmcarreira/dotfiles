@@ -1,0 +1,82 @@
+variables: secrets.yml
+templates:
+  Series_Template:
+    metainfo_series: yes
+    thetvdb_lookup: yes
+    require_field: series_name
+    set:
+      path: /media/data/media/TVShows/{{ series_name|pathscrub }}/Season.{{ series_season }}/
+    quality: 720p+ !h265 !10bit
+
+  Torrent_Template:
+    transmission:
+      host: '{? transmission.host ?}'
+      port: '{? transmission.port ?}'
+      username: '{? transmission.user ?}'
+      password: '{? transmission.pwd ?}'
+    magnets: yes
+
+  Subliminal_Template:
+    subliminal:
+        languages:
+          - pt
+          - eng
+        exact_match: no
+        single: no
+        hearing_impaired: yes
+        providers: [opensubtitles] #only use the following providers
+        authentication:               #consider using the variables plugin
+          opensubtitles:
+            username: '{? opensubtitles.user ?}'
+            password: '{? opensubtitles.pwd ?}'
+          addic7ed:
+            username: '{? addicted.user ?}'
+            password: '{? addicted.pwd ?}'
+
+
+tasks:
+  ShowsRSS:
+    template:
+      - Torrent_Template
+      - Series_Template
+    rss: http://showrss.info/user/151186.rss?magnets=true&namespaces=true&name=null&quality=null&re=null
+    all_series: yes
+
+  DownloadPremiers:
+    template:
+      - Torrent_Template
+    rss: https://torrentseeds.org/rss.php?cats=26&torrent_pass=000010e57d23e06389bbf2af897feee4
+    set:
+      path: /media/data/media/TVShows/SeriesPremiere
+    series_premiere: yes
+
+
+  DecompressSeries:
+    accept_all: yes
+    parsing:
+      series: guessit
+    metainfo_series: yes
+    require_field:
+      - series_name
+      - series_season
+    filesystem:
+      path: /media/data/incoming/
+      regexp: '^((?!\.part(?!0*1\.rar$)\d+\.rar$).)*\.(?:rar|zip)$'
+      recursive: yes
+    decompress:
+      to: /media/data/media/TVShows/{{ series_name|pathscrub }}/Season.{{ series_season }}/
+      keep_dirs: no
+      delete_archive: no
+
+
+  #GetSubtitles:
+    #template:
+      #- Subliminal_Template
+    #filesystem:
+      #path:
+        #- /srv/media/Movies
+      #regexp: '.*\.(avi|mkv|mp4)$'  # only include filenames with these extensions
+      #recursive: yes
+    #accept_all: yes
+    #seen: local                     # seen shouldn't interfer with anything outside this subtitles task
+

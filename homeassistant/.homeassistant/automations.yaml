@@ -1,0 +1,64 @@
+- id: led_strip_tv_source_netfilx_aut
+  alias: Led strip based on TV source Netflix
+  trigger:
+  - platform: state
+    entity_id: sensor.living_room_tv_source
+    to: Netflix
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: media_player.living_room_tv
+    state: playing
+  - condition: state
+    entity_id: light.tv_leds
+    state: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: light.tv_leds
+    data_template:
+      brightness: 255
+      rgb_color:
+      - '0'
+      - '255'
+      - '0'
+- id: led_strip_tv_source_kodi_aut
+  alias: Led strip based on TV source Kodi
+  trigger:
+  - platform: state
+    entity_id: sensor.living_room_tv_source
+    to: RaspberryPi
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: media_player.living_room_tv
+    state: playing
+  - condition: state
+    entity_id: light.tv_leds
+    state: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: light.tv_leds
+    data_template:
+      brightness: 255
+      rgb_color:
+      - '0'
+      - '0'
+      - '255'
+- id: '1542663106000'
+  alias: Turn Off Heating At Night
+  trigger:
+  - at: '23:30:00'
+    platform: time
+  - at: 00:30:00
+    platform: time
+  - at: 01:30:00
+    platform: time
+  - at: 02:30:00
+    platform: time
+  condition: []
+  action:
+  - service: climate.turn_off

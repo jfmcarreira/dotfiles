@@ -1,0 +1,21 @@
+- platform: mqtt
+  name: "Living Room RGB"
+  state_topic: "living_room/awox1/switch/status"
+  command_topic: "living_room/awox1/switch/set"
+  brightness_state_topic: "living_room/awox1/brightness/status"
+  brightness_command_topic: "living_room/awox1/brightness/set"
+  color_temp_state_topic: "living_room/awox1/temperature/status"
+  color_temp_command_topic: "living_room/awox1/temperature/set"
+  rgb_state_topic: "living_room/awox1/color/status"
+  rgb_command_topic: "living_room/awox1/color/set"
+  brightness_scale: 100
+  qos: 0
+  on_command_type: brightness
+  payload_on: "True"
+  payload_off: "False"
+  optimistic: false
+
+- platform: group
+  name: Living Room Lights
+  entities:
+    - light.living_room_rgb

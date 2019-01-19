@@ -1,0 +1,4 @@
+# Create necessary dirs
+TARGET=$1
+mkdir -p ${TARGET}/.homeassistant
+mkdir -p ${TARGET}/.homeassistant/www
