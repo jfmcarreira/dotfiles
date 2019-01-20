@@ -52,8 +52,8 @@ views:
           #- climate.heating
 
   - icon: mdi:server
-    title: Server
-    id: server
+    title: Configuration
+    id: configuration
     # The cards to show on this view.
     cards:
       - type: glance

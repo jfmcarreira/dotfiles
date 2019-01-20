@@ -4,7 +4,7 @@
   - platform: state
     entity_id:  switch.heating_state
   action:
-  - service: notify.living_room_tv
+  - service: notify.notify_all
     data_template:
       message: >
         {% if is_state('switch.heating_state', 'on') %}
@@ -12,4 +12,5 @@
         {% else %}
           Heating is OFF
         {% endif %}
+
 

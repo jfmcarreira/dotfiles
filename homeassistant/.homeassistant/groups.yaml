@@ -3,7 +3,7 @@ joao:
   icon: mdi:human-male
   entities:
   - device_tracker.joao_phone
-  - device_tracker.pegasus
+  #- device_tracker.pegasus
   - sensor.joao_huawei_battery
 
 bianca:

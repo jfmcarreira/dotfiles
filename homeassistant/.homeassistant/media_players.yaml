@@ -4,6 +4,7 @@
   name: Living Room TV
   timeout: 5
   filename: webostv.conf
+  optimistic: false
   turn_on_action:
     service: wake_on_lan.send_magic_packet
     data:
@@ -19,7 +20,7 @@
 - platform: mediaroom
   name: Meo Box
   host: !secret meo_box_ip
-  optimistic: true
+  optimistic: false
 
 # Kodi
 - platform: kodi
@@ -28,6 +29,8 @@
   port: 8080
   username: !secret kodi_user
   password: !secret kodi_pass
+  optimistic: false
+  enable_websocket: true
 
 #Universal
 - platform: universal
@@ -82,6 +85,7 @@
         entity_id: media_player.living_room_tv
         volume_level: '{{ volume_level }}'
   attributes:
+    state: media_player.living_room_tv
     is_volume_muted: media_player.living_room_tv|is_volume_muted
     volume_level: media_player.living_room_tv|volume_level
     source: media_player.living_room_tv|source
