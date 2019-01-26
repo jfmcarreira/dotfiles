@@ -1,0 +1,19 @@
+- id: control_devices_living_room_tv_source
+  alias: "Turn OFF MEO box based on Living Room TV source"
+  trigger:
+  - platform: state
+    entity_id: sensor.living_room_tv_source
+    from: MEO
+  action:
+    service: media_player.turn_off
+    entity_id: media_player.mediaroom_192168110
+
+- id: control_devices_living_room_tv_source
+  alias: "Turn ON MEO box based on Living Room TV source"
+  trigger:
+  - platform: state
+    entity_id: sensor.living_room_tv_source
+    to: MEO
+  action:
+    service: media_player.turn_on
+    entity_id: media_player.mediaroom_192168110

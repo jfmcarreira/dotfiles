@@ -1,5 +1,6 @@
 # Living room temperature
 - platform: mqtt
   name: Living Room Temp
-  state_topic: "home/temperature/living_room"
   unit_of_measurement: 'ºC'
+  state_topic: "home/temperature/living_room"
+

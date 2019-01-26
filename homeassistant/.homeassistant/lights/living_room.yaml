@@ -15,7 +15,29 @@
   payload_off: "False"
   optimistic: false
 
+- platform: mqtt
+  name: "Living Room Table"
+  state_topic: "shellies/shellyswitch-1351AD/relay/0"
+  command_topic: "shellies/shellyswitch-1351AD/relay/0/command"
+  #availability_topic: "living_room/lights/shelly2/online"
+  qos: 0
+  payload_on: "on"
+  payload_off: "off"
+  optimistic: false
+
+- platform: mqtt
+  name: "Living Room Window"
+  state_topic: "shellies/shellyswitch-1351AD/relay/1"
+  command_topic: "shellies/shellyswitch-1351AD/relay/1/command"
+  #availability_topic: "living_room/lights/shelly2/online"
+  qos: 0
+  payload_on: "on"
+  payload_off: "off"
+  optimistic: false
+
 - platform: group
   name: Living Room Lights
   entities:
+    - light.living_room_table
+    - light.living_room_window
     - light.living_room_rgb

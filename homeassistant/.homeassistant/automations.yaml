@@ -60,48 +60,7 @@
   condition: []
   action:
   - service: climate.turn_off
-- id: presence_light_get_home
-  alias: Presence light get home
-  trigger:
-  - platform: state
-    entity_id: group.joao
-    to: home
-  condition:
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
-  - condition: state
-    entity_id: light.living_room_lights
-    state: 'off'
-  action:
-  - service: light.turn_on
-    entity_id: light.living_room_rgb
-    data_template:
-      brightness: 180
-  - delay: 00:01:00
-  - service: light.turn_off
-    entity_id: light.living_room_rgb
-- id: presence_light_tv_off
-  alias: Presence light TV off
-  trigger:
-  - platform: state
-    entity_id: media_player.media_center
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
-  - condition: state
-    entity_id: light.living_room_lights
-    state: 'off'
-  action:
-  - service: light.turn_on
-    entity_id: light.living_room_rgb
-    data_template:
-      brightness: 130
-  - delay: 00:00:30
-  - service: light.turn_off
-    entity_id: light.living_room_rgb
+
 - id: '1546648229449'
   alias: Turn Off Heating At Night - Days Off
   trigger:
