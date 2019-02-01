@@ -1,0 +1,46 @@
+- alias: Presence light when people get home
+  trigger:
+  - platform: state
+    entity_id: group.joao
+    to: home
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: light.living_room_lights
+    state: 'off'
+  action:
+  - service: light.turn_on
+    entity_id: light.living_room_table
+  - delay: 00:01:00
+  - service: light.turn_off
+    entity_id: light.living_room_table
+
+- alias: Away Mode
+  trigger:
+  - platform: state
+    entity_id: input_boolean.notify_home
+    from: 'on'
+    to: 'off'
+  action:
+  - service: light.turn_off
+    entity_id: group.all_lights
+  - service: media_player.turn_off
+    entity_id: media_player.living_room_tv
+
+
+- alias: People Home
+  hide_entity: true
+  trigger:
+  - platform: state
+    entity_id: input_boolean.notify_home
+  action:
+  - service: notify.notify_all
+    data_template:
+      message: >
+        {% if is_state('input_boolean.notify_home', 'on') %}
+          Casa ocupada
+        {% else %}
+          Casa vazia
+        {% endif %}

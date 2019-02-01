@@ -95,6 +95,11 @@ panel_iframe:
     title: Configurator
     icon: mdi:wrench
     url: !secret configurator_url
+  nodered:
+    title: 'Node-Red'
+    icon: mdi:shuffle-variant
+    url: !secret node_red_url
+
 
 shopping_list:
 
@@ -114,7 +119,7 @@ mqtt:
 notify:
   - platform: html5
     name: notify_html5
-    gcm_api_key: !sectet gcm_api_key
+    gcm_api_key: !secret gcm_api_key
     gcm_sender_id: !secret gcm_sender_id
   - platform: webostv
     host: !secret living_room_ip
@@ -130,8 +135,8 @@ notify:
 device_tracker:
   - platform: ping
     track_new_devices: True
-    interval_seconds: 15
-    consider_home: 300
+    interval_seconds: 10
+    consider_home: 31
     hosts:
       pegasus: !secret pegasus_ip
       joao_phone: !secret joao_phone_ip
@@ -192,11 +197,31 @@ climate:
 
 
 
+
+input_boolean:
+  night_time:
+    name: Night time
+    initial: off
+    icon: mdi:hotel
+  house_guest:
+    name: Convidados
+    initial: off
+    icon: mdi:account-group
+  notify_home:
+    name: Notify House Occupied
+    initial: off
+    icon: mdi:home
+
+
+
+
+
 media_player: !include media_players.yaml
 scene: !include scenes.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 
+binary_sensor: !include_dir_merge_list binary_sensors
 light:  !include_dir_merge_list lights
 sensor: !include_dir_merge_list sensors
 switch: !include_dir_merge_list switches

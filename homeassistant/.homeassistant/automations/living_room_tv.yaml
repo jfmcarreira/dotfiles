@@ -1,0 +1,105 @@
+- alias: Presence light when TV OFF
+  trigger:
+  - entity_id: media_player.media_center
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: light.living_room_lights
+    state: 'off'
+  action:
+  - entity_id:  light.living_room_table
+    service: light.turn_on
+  - delay: 00:00:30
+  - entity_id:  light.living_room_table
+    service: light.turn_off
+
+- alias: "Turn OFF MEO box based on Living Room TV source and state"
+  hide_entity: true
+  trigger:
+  - entity_id: media_player.living_room_tv
+    platform: state
+    to: 'off'
+  - platform: state
+    entity_id: sensor.living_room_tv_source
+    from: MEO
+  action:
+    service: media_player.turn_off
+    entity_id: media_player.mediaroom_192168110
+
+- alias: "Turn ON MEO box based on Living Room TV source"
+  hide_entity: true
+  trigger:
+  - platform: state
+    entity_id: sensor.living_room_tv_source
+    to: MEO
+  action:
+    service: media_player.turn_on
+    entity_id: media_player.mediaroom_192168110
+
+
+#- id: turn_on_meo_tv_on
+  #alias: Presence light when TV OFF
+  #trigger:
+  #- entity_id: media_player.media_center
+    #platform: state
+    #to: 'on'
+  #action:
+    #service: media_player.turn_on
+    #entity_id: media_player.mediaroom_192168110
+
+
+#- id: led_strip_tv_source_netfilx_aut
+  #alias: Led strip based on TV source Netflix
+  #trigger:
+  #- platform: state
+    #entity_id: sensor.living_room_tv_source
+    #to: Netflix
+  #condition:
+  #- condition: state
+    #entity_id: sun.sun
+    #state: below_horizon
+  #- condition: state
+    #entity_id: media_player.living_room_tv
+    #state: playing
+  #- condition: state
+    #entity_id: light.tv_leds
+    #state: 'on'
+  #action:
+  #- service: light.turn_on
+    #entity_id: light.tv_leds
+    #data_template:
+      #brightness: 255
+      #rgb_color:
+      #- '0'
+      #- '255'
+      #- '0'
+#- id: led_strip_tv_source_kodi_aut
+  #alias: Led strip based on TV source Kodi
+  #trigger:
+  #- platform: state
+    #entity_id: sensor.living_room_tv_source
+    #to: RaspberryPi
+  #condition:
+  #- condition: state
+    #entity_id: sun.sun
+    #state: below_horizon
+  #- condition: state
+    #entity_id: media_player.living_room_tv
+    #state: playing
+  #- condition: state
+    #entity_id: light.tv_leds
+    #state: 'on'
+  #action:
+  #- service: light.turn_on
+    #entity_id: light.tv_leds
+    #data_template:
+      #brightness: 255
+      #rgb_color:
+      #- '0'
+      #- '0'
+      #- '255'
+

@@ -1,0 +1,38 @@
+#- id: heating_state_aut
+- alias: Notify Heating state
+  hide_entity: true
+  trigger:
+  - platform: state
+    entity_id:  switch.heating_state
+  action:
+  - service: notify.notify_all
+    data_template:
+      message: >
+        {% if is_state('switch.heating_state', 'on') %}
+          Aquecimento ligado
+        {% else %}
+          Aquecimento desligado
+        {% endif %}
+
+
+- id: '1542663106000'
+  alias: Turn Off Heating At Night - Working Days
+  trigger:
+  - at: '23:30:00'
+    platform: time
+  - at: 01:30:00
+    platform: time
+  - at: 02:30:00
+    platform: time
+  condition: []
+  action:
+  - service: climate.turn_off
+
+- id: '1546648229449'
+  alias: Turn Off Heating At Night - Days Off
+  trigger:
+  - at: '2:30:00'
+    platform: time
+  condition: []
+  action:
+  - service: climate.turn_off
