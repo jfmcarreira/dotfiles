@@ -17,28 +17,6 @@
   - entity_id:  light.living_room_table
     service: light.turn_off
 
-- alias: "Turn OFF MEO box based on Living Room TV source and state"
-  hide_entity: true
-  trigger:
-  - entity_id: media_player.living_room_tv
-    platform: state
-    to: 'off'
-  - platform: state
-    entity_id: sensor.living_room_tv_source
-    from: MEO
-  action:
-    service: media_player.turn_off
-    entity_id: media_player.mediaroom_192168110
-
-- alias: "Turn ON MEO box based on Living Room TV source"
-  hide_entity: true
-  trigger:
-  - platform: state
-    entity_id: sensor.living_room_tv_source
-    to: MEO
-  action:
-    service: media_player.turn_on
-    entity_id: media_player.mediaroom_192168110
 
 
 #- id: turn_on_meo_tv_on

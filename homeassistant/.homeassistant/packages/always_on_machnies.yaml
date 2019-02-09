@@ -1,0 +1,16 @@
+sensor:
+  # Tegra
+  - platform: command_line
+    name: Tegra CPU Temperature
+    unit_of_measurement: "°C"
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    value_template: '{{ value | multiply(0.001) }}'
+
+
+  # Helium
+  - platform: mqtt
+    name: Helium CPU Temperature
+    unit_of_measurement: "°C"
+    state_topic: "cpu/temperature/helium"
+
+

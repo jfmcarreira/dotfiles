@@ -12,6 +12,7 @@ homeassistant:
   time_zone: Europe/Lisbon
   # Customization file
   customize: !include customize.yaml
+  packages: !include_dir_named packages
 
 ## Show links to resources in log and frontend
 #introduction:
@@ -129,14 +130,18 @@ notify:
     name: notify_all
     services:
       - service: living_room_tv
-      - service: notify_html5
+      #- service: notify_html5
 
 # Track devices
 device_tracker:
+  - platform: thomson
+    host: !secret router_ip
+    username: !secret router_user
+    password: !secret router_pass
+    consider_home: 60
   - platform: ping
     track_new_devices: True
-    interval_seconds: 10
-    consider_home: 31
+    consider_home: 60
     hosts:
       pegasus: !secret pegasus_ip
       joao_phone: !secret joao_phone_ip
@@ -146,10 +151,25 @@ device_tracker:
     max_gps_accuracy: 200
     mqtt_topic: "owntracks/#"
     waypoints: false
-    consider_home: 180
+
+# Track the sun
+sun:
+  name: sun_tracker
+
+# Weather prediction
+weather:
+  #- platform: ipma
+    #name: Meteorologia
+  - platform: darksky
+    name: Meteorologia
+    api_key: !secret weather_api_key
 
 
 zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 50
   - name: ESTG
     latitude: !secret estg_latitude
     longitude: !secret estg_longitude
@@ -158,18 +178,9 @@ zone:
   - name: CRR
     latitude: !secret crr_lat
     longitude: !secret crr_long
-    radius: 150
+    radius: 50
     icon: mdi:glass-cocktail
 
-# Track the sun
-sun:
-  name: sun_tracker
-
-# Weather prediction
-weather:
-  - platform: darksky
-    name: Meteorologia
-    api_key: !secret weather_api_key
 
 climate:
   - platform: generic_thermostat
@@ -187,13 +198,28 @@ climate:
       minutes: 3
 
 
-#google_assistant:
-  #project_id: !secret google_assistant_clientid
-  #api_key: !secret google_assistant_api_key
-  #exposed_domains:
-    #- light
-    #- climate
-    #- media_player
+google_assistant:
+  project_id: !secret google_assistant_clientid
+  api_key: !secret google_assistant_api_key
+  expose_by_default: false
+  entity_config:
+    media_player.media_center:
+      expose: true
+      aliases:
+        - TV Sala
+        - Televisão da Sala
+        - Living Room TV
+    climate.heating:
+      expose: true
+      aliases:
+        - Aquecimento
+    input_boolean.night_time:
+      expose: true
+    light.living_room_lights:
+      expose: false
+  exposed_domains:
+    - light
+    - climate
 
 
 
@@ -203,25 +229,10 @@ input_boolean:
     name: Night time
     initial: off
     icon: mdi:hotel
-  house_guest:
-    name: Convidados
-    initial: off
-    icon: mdi:account-group
-  notify_home:
-    name: Notify House Occupied
-    initial: off
-    icon: mdi:home
 
-
-
-
-
-media_player: !include media_players.yaml
-scene: !include scenes.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 
-binary_sensor: !include_dir_merge_list binary_sensors
 light:  !include_dir_merge_list lights
 sensor: !include_dir_merge_list sensors
 switch: !include_dir_merge_list switches

@@ -10,6 +10,7 @@
   rgb_command_topic: "living_room/awox1/color/set"
   brightness_scale: 100
   qos: 0
+  retain: false
   on_command_type: brightness
   payload_on: "True"
   payload_off: "False"
@@ -21,6 +22,7 @@
   command_topic: "shellies/shellyswitch-1351AD/relay/0/command"
   #availability_topic: "living_room/lights/shelly2/online"
   qos: 0
+  retain: true
   payload_on: "on"
   payload_off: "off"
   optimistic: false
@@ -31,6 +33,7 @@
   command_topic: "shellies/shellyswitch-1351AD/relay/1/command"
   #availability_topic: "living_room/lights/shelly2/online"
   qos: 0
+  retain: true
   payload_on: "on"
   payload_off: "off"
   optimistic: false

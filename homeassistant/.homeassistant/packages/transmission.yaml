@@ -1,0 +1,28 @@
+
+sensor:
+  - platform: transmission
+    name: Transmission
+    host: !secret transmission_host
+    username: !secret transmission_user
+    password: !secret transmission_pass
+    monitored_variables:
+      - 'current_status'
+      - 'download_speed'
+      - 'upload_speed'
+      - 'active_torrents'
+      - 'total_torrents'
+
+switch:
+  - platform: transmission
+    name: Transmission
+    host: !secret transmission_host
+    username: !secret transmission_user
+    password: !secret transmission_pass
+
+
+history_graph:
+  transmission_gr:
+      name: Transmission Speed
+      entities:
+        - sensor.transmission_down_speed
+        - sensor.transmission_up_speed
