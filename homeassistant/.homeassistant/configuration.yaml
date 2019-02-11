@@ -182,22 +182,6 @@ zone:
     icon: mdi:glass-cocktail
 
 
-climate:
-  - platform: generic_thermostat
-    name: Heating
-    heater: switch.heating_state
-    target_sensor: sensor.living_room_temp
-    min_temp: 10
-    max_temp: 24
-    min_cycle_duration:
-      seconds: 5
-    initial_operation_mode: "off"
-    cold_tolerance: 0.5
-    hot_tolerance: 0
-    keep_alive:
-      minutes: 3
-
-
 google_assistant:
   project_id: !secret google_assistant_clientid
   api_key: !secret google_assistant_api_key
@@ -223,19 +207,12 @@ google_assistant:
 
 
 
-
-input_boolean:
-  night_time:
-    name: Night time
-    initial: off
-    icon: mdi:hotel
-
 group: !include groups.yaml
 automation: !include automations.yaml
 
-light:  !include_dir_merge_list lights
+#light:  !include_dir_merge_list lights
 sensor: !include_dir_merge_list sensors
-switch: !include_dir_merge_list switches
+#switch: !include_dir_merge_list switches
 script: !include_dir_merge_list script
-automation old: !include_dir_merge_list automations
+#automation old: !include_dir_merge_list automations
 

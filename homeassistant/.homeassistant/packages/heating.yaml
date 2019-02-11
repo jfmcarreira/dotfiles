@@ -1,0 +1,67 @@
+climate:
+  - platform: generic_thermostat
+    name: Heating
+    heater: switch.heating_state
+    target_sensor: sensor.living_room_temp
+    min_temp: 10
+    max_temp: 24
+    min_cycle_duration:
+      seconds: 5
+    initial_operation_mode: "off"
+    cold_tolerance: 0.5
+    hot_tolerance: 0
+    keep_alive:
+      minutes: 3
+
+switch:
+  - platform: mqtt
+    name: Heating State
+    command_topic: "home/heating/state"
+    payload_on: "ON"
+    payload_off: "OFF"
+    state_on: "ON"
+    state_off: "OFF"
+    optimistic: false
+    qos: 0
+    retain: true
+
+
+automation old:
+  #- id: heating_state_aut
+  - alias: Notify Heating state
+    hide_entity: true
+    trigger:
+    - platform: state
+      entity_id:  switch.heating_state
+    action:
+    - service: notify.notify_all
+      data_template:
+        message: >
+          {% if is_state('switch.heating_state', 'on') %}
+            Aquecimento ligado
+          {% else %}
+            Aquecimento desligado
+          {% endif %}
+
+
+  - id: '1542663106000'
+    alias: Turn Off Heating At Night - Working Days
+    trigger:
+    - at: '23:30:00'
+      platform: time
+    - at: 01:30:00
+      platform: time
+    - at: 02:30:00
+      platform: time
+    condition: []
+    action:
+    - service: climate.turn_off
+
+  - id: '1546648229449'
+    alias: Turn Off Heating At Night - Days Off
+    trigger:
+    - at: '2:30:00'
+      platform: time
+    condition: []
+    action:
+    - service: climate.turn_off
