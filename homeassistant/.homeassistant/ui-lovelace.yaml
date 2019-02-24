@@ -4,6 +4,12 @@ title: J&B Home
 resources:
   - url: /local/custom-lovelace/gauge-card/?v=1
     type: js
+  - url: /local/lovelace-card-modder/card-modder.js?v=1
+    type: js
+  - url: /local/lovelace-card-tools/card-tools.js?v=1
+    type: js
+  - url: /local/lovelace-fold-entity-row/fold-entity-row.js?v=1
+    type: js
 
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
 background: center / cover no-repeat url("/background.png") fixed
@@ -14,67 +20,107 @@ theme: dark-mode
   #- weblink.router
 
 views:
-  - icon: mdi:home-assistant
-    title: Home
-    # Optional unique id for direct access /lovelace/${id}
-    id: home
-    # The cards to show on this view.
+  - title: Main
+    badges: []
+    icon: 'mdi:home'
     cards:
       - type: weather-forecast
-        entity: weather.weather_forecast
+        name: Meteorologia
+        entity: weather.meteorologia
 
       - type: glance
-        title: People at Home
+        title: Pessoas
         entities:
-          - entity: group.joao
+          - entity: input_boolean.house_guest
+            tap_action:
+              action: toggle
           - entity: group.bianca
+          - entity: group.joao
 
       - type: media-control
         entity: media_player.media_center
 
-      #- type: picture-entity
-        #name: Living Room Table Light
-        #entity: light.living_room_rgb
-        #state_image:
-          #"don": /local/living_room_rgb_on.jpg
-          #"off": /local/living_room_rgb_off.jpg
-        #tap_action: more-info
-        #hold_action: toggle
-
-      - type: light
-        entity: light.living_room_rgb
-
       - type: thermostat
+        name: Aquecimento
         entity: climate.heating
-      #- type: entities
-        #title: Controlo Temperatura
-        #entities:
-          #- climate.heating
 
-  - icon: mdi:server
-    title: Configuration
-    id: configuration
-    # The cards to show on this view.
-    cards:
+
       - type: glance
-        title: Transmission Status
+        title: Sala de Estar
         entities:
-        - entity: switch.transmission
-          name: ON/OFF
-        - entity: sensor.transmission_status
-          name: Status
-        #- entity: sensor.transmission_total_torrents
-        #  name: Torrents
-        - entity: sensor.transmission_active_torrents
-          #name: Active
-          name: Torrents
-        - entity: sensor.transmission_down_speed
-          name: Down speed
-        - entity: sensor.transmission_up_speed
-          name: Up speed
+          - entity: light.living_room_table
+            name: Mesa
+            tap_action:
+              action: toggle
+          - entity: light.living_room_window
+            name: Sofá
+            tap_action:
+              action: toggle
+          - entity: light.living_room_rgb
+            name: Abajur
+            tap_action:
+              action: toggle
+          - entity: light.tv_leds
+            name: TV LEDs
+            tap_action:
+              action: toggle
+          - entity: sensor.living_room_temp
+            name: Temperatura
 
-      - type: entities
-        title: Automations
+
+      - type: glance
+        title: Luzes/Acções
+        show_name: true
+        show_state: false
         entities:
-          - group.all_switches
-          - group.all_automations
+          - entity: light.hallwaylight
+            name: Luz do Corredor
+            tap_action:
+              action: toggle
+          - entity: switch.flux_sala
+            name: Flux Sala
+          - entity: input_boolean.night_time
+            name: Noite / Sair
+            tap_action:
+              action: toggle
+
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Tranmission
+        items:
+          - switch.transmission_server
+          - sensor.transmission_server_status
+          - sensor.transmission_server_active_torrents
+          - sensor.transmission_server_down_speed
+          - sensor.transmission_server_up_speed
+
+      - type: custom:fold-entity-row
+        head: group.all_automations
+
+
+  - title: Configuration
+    badges: []
+    icon: 'mdi:server'
+    cards:
+      - entities:
+          - entity: input_boolean.notify_home
+          - entity: group.all_automations
+          - entity: group.all_lights
+          - entity: group.all_switches
+        type: glance
+      - entities:
+          - entity: switch.transmission_server
+          - entity: sensor.transmission_server_status
+          - entity: sensor.transmission_server_active_torrents
+          - entity: sensor.transmission_server_down_speed
+          - entity: sensor.transmission_server_up_speed
+        title: Transmission Status
+        type: glance
+      - type: history-graph
+        entities:
+          - sensor.tegra_cpu_temperature
+          - sensor.helium_cpu_temperature
+
+
+

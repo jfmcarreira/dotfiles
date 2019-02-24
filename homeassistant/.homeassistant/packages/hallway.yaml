@@ -1,0 +1,46 @@
+binary_sensor:
+  - platform: mqtt
+    name: "HallwayLightSwitch"
+    state_topic: "cmnd/2_shelly1_21_sw/POWER1"
+    payload_on: "ON"
+    payload_off: "OFF"
+
+light:
+  - platform: mqtt
+    name: "HallwayLight"
+    state_topic: "stat/shelly1_21/POWER"
+    command_topic: "cmnd/shelly1_21/POWER"
+    qos: 0
+    retain: false
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+
+
+
+counter:
+  hallway_switch_toggle_count:
+    initial: 0
+    step: 1
+
+automation old:
+  - alias: "Hallway Light Switch Toggle Count"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.hallwaylightswitch
+    action:
+    - service: counter.increment
+      entity_id: counter.hallway_switch_toggle_count
+
+  #- alias: "Hallway Light Switch Action"
+    #hide_entity: true
+    #trigger:
+      #platform: numeric_state
+      #entity_id: counter.hallway_switch_toggle_count
+      #above: 0
+      #for:
+        #seconds: 1
+    #action:
+    #- service: counter.reset
+      #entity_id: counter.hallway_switch_toggle_count

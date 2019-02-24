@@ -16,7 +16,9 @@ climate:
 switch:
   - platform: mqtt
     name: Heating State
-    command_topic: "home/heating/state"
+    #command_topic: "home/heating/state"
+    state_topic: "stat/sonoff_basic_41/POWER"
+    command_topic: "cmnd/sonoff_basic_41/POWER"
     payload_on: "ON"
     payload_off: "OFF"
     state_on: "ON"
@@ -56,6 +58,7 @@ automation old:
     condition: []
     action:
     - service: climate.turn_off
+      entity_id: climate.heating
 
   - id: '1546648229449'
     alias: Turn Off Heating At Night - Days Off
@@ -65,3 +68,4 @@ automation old:
     condition: []
     action:
     - service: climate.turn_off
+      entity_id: climate.heating

@@ -17,6 +17,12 @@ homeassistant:
 ## Show links to resources in log and frontend
 #introduction:
 
+lovelace:
+  mode: yaml
+
+system_health:
+
+
 # Enables the frontend
 frontend:
   javascript_version: auto

@@ -5,6 +5,13 @@ sensor:
     unit_of_measurement: "°C"
     state_topic: "home/temperature/living_room"
 
+binary_sensor:
+  - platform: mqtt
+    name: "Living Room Window Switch"
+    state_topic: "shellies/shellyswitch-1351AD/input/1"
+    payload_on: "1"
+    payload_off: "0"
+
 light:
   - platform: mqtt
     name: "TV LEDS"
@@ -43,7 +50,7 @@ light:
     command_topic: "shellies/shellyswitch-1351AD/relay/0/command"
     #availability_topic: "living_room/lights/shelly2/online"
     qos: 0
-    retain: true
+    retain: false
     payload_on: "on"
     payload_off: "off"
     optimistic: false
@@ -66,3 +73,56 @@ light:
       - light.living_room_table
       - light.living_room_window
       - light.living_room_rgb
+
+switch:
+  - platform: flux
+    name: Flux Sala
+    lights:
+      - light.living_room_rgb
+    start_time: '7:00'
+    stop_time: '01:00'
+    start_colortemp: 5000
+    sunset_colortemp: 3500
+    stop_colortemp: 1900
+    disable_brightness_adjust: true
+    transition: 30
+    interval: 60
+
+counter:
+  living_room_window_switch_toggle_count:
+    initial: 0
+    step: 1
+
+automation old:
+  - alias: "Living Room Window Switch Toggle Count"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.living_room_window_switch
+    action:
+    - service: counter.increment
+      entity_id: counter.living_room_window_switch_toggle_count
+
+  - alias: "Living Room Window Switch Action"
+    hide_entity: true
+    trigger:
+      platform: numeric_state
+      entity_id: counter.living_room_window_switch_toggle_count
+      above: 0
+      for:
+        seconds: 1
+    #condition:
+      #condition: numeric_state
+      #entity_id: counter.living_room_window_switch_toggle_count
+      #above: 0
+    action:
+    - service: light.toggle
+      data_template:
+        entity_id: >
+          {% if is_state(trigger.entity_id, '1') %}
+            light.living_room_window
+          {% else %}
+            light.living_room_rgb
+          {% endif %}
+    - service: counter.reset
+      entity_id: counter.living_room_window_switch_toggle_count

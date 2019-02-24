@@ -57,7 +57,7 @@ automation old:
       #entity_id: media_player.living_room_tv
 
 
-  - alias: People Home
+  - alias: People Home Notification
     hide_entity: true
     trigger:
     - platform: state
