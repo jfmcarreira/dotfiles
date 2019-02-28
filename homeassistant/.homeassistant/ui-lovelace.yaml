@@ -2,13 +2,19 @@ title: J&B Home
 
 # Include external resources
 resources:
-  - url: /local/custom-lovelace/gauge-card/?v=1
+  #- url: /local/lovelace/repo-ciotlosm/gauge-card/gauge-card/?v=1
+    #type: js
+  - url: /local/lovelace/repo-bramkragten/swipe-card/swipe-card.js?v=1
     type: js
-  - url: /local/lovelace-card-modder/card-modder.js?v=1
+  - url: /local/lovelace/button-card/button-card.js?v=1
     type: js
-  - url: /local/lovelace-card-tools/card-tools.js?v=1
+  - url: /local/lovelace/card-modder/card-modder.js?v=1
     type: js
-  - url: /local/lovelace-fold-entity-row/fold-entity-row.js?v=1
+  - url: /local/lovelace/card-tools/card-tools.js?v=1
+    type: js
+  - url: /local/lovelace/fold-entity-row/fold-entity-row.js?v=1
+    type: js
+  - url: /local/lovelace/vertical-stack-in-card/vertical-stack-in-card.js?v=1
     type: js
 
 # Optional background for all views. Check https://developer.mozilla.org/en-US/docs/Web/CSS/background for more examples.
@@ -24,48 +30,28 @@ views:
     badges: []
     icon: 'mdi:home'
     cards:
+
+
       - type: weather-forecast
         name: Meteorologia
         entity: weather.meteorologia
 
       - type: glance
         title: Pessoas
+        show_state: true
         entities:
+          - entity: binary_sensor.notify_home
+            name: Casa Ocupada
           - entity: input_boolean.house_guest
             tap_action:
               action: toggle
-          - entity: group.bianca
-          - entity: group.joao
+          - entity: sensor.bianca_status
+            name: Bianca
+            #icon: mdi:human-female
+          - entity: sensor.joao_status
+            name: João
+            #icon: mdi:human-male
 
-      - type: media-control
-        entity: media_player.media_center
-
-      - type: thermostat
-        name: Aquecimento
-        entity: climate.heating
-
-
-      - type: glance
-        title: Sala de Estar
-        entities:
-          - entity: light.living_room_table
-            name: Mesa
-            tap_action:
-              action: toggle
-          - entity: light.living_room_window
-            name: Sofá
-            tap_action:
-              action: toggle
-          - entity: light.living_room_rgb
-            name: Abajur
-            tap_action:
-              action: toggle
-          - entity: light.tv_leds
-            name: TV LEDs
-            tap_action:
-              action: toggle
-          - entity: sensor.living_room_temp
-            name: Temperatura
 
 
       - type: glance
@@ -84,19 +70,62 @@ views:
             tap_action:
               action: toggle
 
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Tranmission
-        items:
-          - switch.transmission_server
-          - sensor.transmission_server_status
-          - sensor.transmission_server_active_torrents
-          - sensor.transmission_server_down_speed
-          - sensor.transmission_server_up_speed
+      - type: thermostat
+        name: Aquecimento
+        entity: climate.heating
 
-      - type: custom:fold-entity-row
-        head: group.all_automations
+      - type: custom:vertical-stack-in-card
+        title: Sala de Estar
+        cards:
+          - type: media-control
+            entity: media_player.media_center
+          - type: glance
+            title: Luzes
+            entities:
+              - entity: light.living_room_table
+                name: Mesa
+                tap_action:
+                  action: toggle
+              - entity: light.living_room_window
+                name: Sofá
+                tap_action:
+                  action: toggle
+              - entity: light.living_room_rgb
+                name: Abajur
+                tap_action:
+                  action: toggle
+              - entity: light.tv_leds
+                name: TV LEDs
+                tap_action:
+                  action: toggle
+          - type: sensor
+            entity: sensor.living_room_temp
+            name: Temperatura
+            line_color: '#36A2EB'
+            line_width: 8
+            graph: line
+
+      - type: custom:swipe-card
+        parameters:
+          spaceBetween: 8
+          scrollbar:
+            hide: false
+            draggable: true
+            snapOnRelease: true
+        cards:
+          - type: sensor
+            entity: sensor.tegra_cpu_temperature
+            name: Tegra
+            line_width: 8
+            line_color: '#FF6384'
+            graph: line
+          - type: sensor
+            entity: sensor.helium_cpu_temperature
+            name: Helium
+            line_color: '#36A2EB'
+            line_width: 8
+            graph: line
+
 
 
   - title: Configuration

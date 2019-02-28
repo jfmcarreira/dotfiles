@@ -1,3 +1,35 @@
+# Track devices
+device_tracker:
+  - platform: thomson
+    host: !secret router_ip
+    username: !secret router_user
+    password: !secret router_pass
+    consider_home: 30
+    new_device_defaults:
+      track_new_devices: false
+  - platform: bluetooth_tracker
+    consider_home: 30
+    request_rssi: true
+    new_device_defaults:
+      track_new_devices: true
+  - platform: ping
+    consider_home: 10
+    new_device_defaults:
+      track_new_devices: False
+    hosts:
+      pegasus: !secret pegasus_ip
+      joao_phone: !secret joao_phone_ip
+      bianca_phone: !secret bianca_phone_ip
+  - platform: owntracks
+    consider_home: 30
+    new_device_defaults:
+      track_new_devices: True
+    max_gps_accuracy: 200
+    mqtt_topic: "owntracks/ha/#"
+    waypoints: false
+
+
+# Controlled toggles
 input_boolean:
   house_guest:
     name: Convidados
@@ -8,23 +40,246 @@ input_boolean:
     initial: off
     icon: mdi:home
 
-  night_time:
-    name: Night time
-    initial: off
-    icon: mdi:walk
+sensor:
+  - platform: template
+    sensors:
+      joao_status:
+        icon_template: "mdi:human-male"
+        friendly_name: João
+        value_template: '{{ states.input_select.joao_status.state }}'
+      bianca_status:
+        icon_template: "mdi:human-female"
+        friendly_name: Bianca
+        value_template: '{{ states.input_select.bianca_status.state }}'
 
 binary_sensor:
   - platform: template
     sensors:
+      notify_home:
+        friendly_name: Notify House Occupied
+        icon_template: "mdi:home"
+        value_template: "{{ states.input_boolean.notify_home.state == 'on' }}"
       joao_home:
-        value_template: >-
-          {{ is_state('group.joao', 'home') }}
+        value_template: "{{ states.sensor.joao_status.state != 'Away' }}"
       bianca_home:
-        value_template: >-
-          {{ is_state('group.bianca', 'home') }}
+        value_template: "{{ states.sensor.bianca_status.state != 'Away' }}"
+
+
+# Possible States
+input_select:
+  joao_status:
+    name: João
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+    initial: Home
+  bianca_status:
+    name: Bianca
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+    initial: Home
+
+
+# Enables support for tracking state changes over time
+recorder:
+  exclude:
+    domains:
+      - device_tracker
+      - person
+    entities:
+      - group.all_devices
+      - group.joao
+      - sensor.joao_status
+      - input_select.joao_status
+      - group.bianca
+      - sensor.bianca_status
+      - input_select.bianca_status
+
+history:
+  exclude:
+    domains:
+      - device_tracker
+      - person
+    entities:
+      - group.all_devices
+      - group.joao
+      - sensor.joao_status
+      - input_select.joao_status
+      - group.bianca
+      - sensor.bianca_status
+      - input_select.bianca_status
+
+# View all events in a logbook
+logbook:
+  exclude:
+    domains:
+      - device_tracker
+      - person
+    entities:
+      - group.all_devices
+      - group.joao
+      - sensor.joao_status
+      - input_select.joao_status
+      - group.bianca
+      - sensor.bianca_status
+      - input_select.bianca_status
+
 
 
 automation old:
+  - alias: Mark person as just arrived
+    trigger:
+      - platform: state
+        entity_id: person.joao
+        from: 'not_home'
+        to: 'home'
+      - platform: state
+        entity_id: person.helen
+        from: 'not_home'
+        to: 'home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'person.joao' %}
+              input_select.joao_status
+            {% else %}
+              input_select.bianca_status
+            {% endif %}
+          option: >
+            {% if trigger.entity_id == 'person.joao' %}
+              {% if states.input_select.joao_status.state == 'Just Left' %}
+                Home
+              {% else %}
+                Just Arrived
+              {% endif %}
+            {% else %}
+              {% if states.input_select.bianca_status.state == 'Just Left' %}
+                Home
+              {% else %}
+                Just Arrived
+              {% endif %}
+            {% endif %}
+
+  - alias: Mark person as home
+    trigger:
+      - platform: state
+        entity_id: input_select.joao_status
+        to: 'Just Arrived'
+        for:
+          minutes: 2
+      - platform: state
+        entity_id: input_select.bianca_status
+        to: 'Just Arrived'
+        for:
+          minutes: 2
+      - platform: state
+        entity_id: input_select.joao_status
+        from: 'Just Left'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: input_select.bianca_status
+        from: 'Just Left'
+        to: 'Just Arrived'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'person.joao' %}
+              input_select.joao_status
+            {% else %}
+              input_select.bianca_status
+            {% endif %}
+          option: Home
+
+  - alias: Mark person as just left
+    trigger:
+      - platform: state
+        entity_id: person.joao
+        from: 'home'
+        to: 'not_home'
+      - platform: state
+        entity_id: person.bianca
+        from: 'home'
+        to: 'not_home'
+      - platform: state
+        entity_id: person.joao
+        to: 'not_home'
+        for:
+          minutes: 5
+      - platform: state
+        entity_id: person.bianca
+        to: 'not_home'
+        for:
+          minutes: 5
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'person.joao' %}
+              input_select.joao_status
+            {% else %}
+              input_select.bianca_status
+            {% endif %}
+          option: Just Left
+
+  - alias: Mark person as away
+    trigger:
+      - platform: state
+        entity_id: input_select.joao_status
+        to: 'Just Left'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.bianca_status
+        to: 'Just Left'
+        for:
+          minutes: 10
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'person.joao' %}
+              input_select.joao_status
+            {% else %}
+              input_select.bianca_status
+            {% endif %}
+          option: Away
+
+  - alias: Mark person as extended away
+    trigger:
+      - platform: state
+        entity_id: input_select.joao_status
+        to: 'Away'
+        for:
+          hours: 24
+      - platform: state
+        entity_id: input_select.bianca_status
+        to: 'Away'
+        for:
+          hours: 24
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'person.joao' %}
+              input_select.joao_status
+            {% else %}
+              input_select.bianca_status
+            {% endif %}
+          option: Extended Away
+
+
+
+
+
   #- alias: Presence light when people get home
     #trigger:
     #- platform: state
@@ -57,20 +312,20 @@ automation old:
       #entity_id: media_player.living_room_tv
 
 
-  - alias: People Home Notification
-    hide_entity: true
-    trigger:
-    - platform: state
-      entity_id: input_boolean.notify_home
-    action:
-    - service: notify.notify_all
-      data_template:
-        message: >
-          {% if is_state('input_boolean.notify_home', 'on') %}
-            Casa ocupada
-          {% else %}
-            Casa vazia
-          {% endif %}
+  #- alias: People Home Notification
+    #hide_entity: true
+    #trigger:
+    #- platform: state
+      #entity_id: input_boolean.notify_home
+    #action:
+    #- service: notify.notify_all
+      #data_template:
+        #message: >
+          #{% if is_state('input_boolean.notify_home', 'on') %}
+            #Casa ocupada
+          #{% else %}
+            #Casa vazia
+          #{% endif %}
 
 
 #- alias: Notify Bianca Home
