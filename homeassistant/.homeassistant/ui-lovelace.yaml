@@ -52,58 +52,67 @@ views:
             name: João
             #icon: mdi:human-male
 
-
-
       - type: glance
-        title: Luzes/Acções
-        show_name: true
-        show_state: false
+        title: Luzes
         entities:
           - entity: light.hallwaylight
             name: Luz do Corredor
             tap_action:
               action: toggle
-          - entity: switch.flux_sala
-            name: Flux Sala
-          - entity: input_boolean.night_time
-            name: Noite / Sair
+          - entity: light.living_room_table
+            name: Mesa
             tap_action:
               action: toggle
+          - entity: light.living_room_window
+            name: Sofá
+            tap_action:
+              action: toggle
+          - entity: light.living_room_rgb
+            name: Abajur
+            tap_action:
+              action: toggle
+          - entity: light.tv_leds
+            name: TV LEDs
+            tap_action:
+              action: toggle
+
+      - type: media-control
+        entity: media_player.media_center
+
+      #- type: custom:vertical-stack-in-card
+        #title: Sala de Estar
+        #cards:
+          #- type: media-control
+            #entity: media_player.media_center
+          #- type: glance
+            #title: Luzes
+            #entities:
+              #- entity: light.living_room_table
+                #name: Mesa
+                #tap_action:
+                  #action: toggle
+              #- entity: light.living_room_window
+                #name: Sofá
+                #tap_action:
+                  #action: toggle
+              #- entity: light.living_room_rgb
+                #name: Abajur
+                #tap_action:
+                  #action: toggle
+              #- entity: light.tv_leds
+                #name: TV LEDs
+                #tap_action:
+                  #action: toggle
+          #- type: sensor
+            #entity: sensor.living_room_temp
+            #name: Temperatura
+            #line_color: '#36A2EB'
+            #line_width: 8
+            #graph: line
 
       - type: thermostat
         name: Aquecimento
         entity: climate.heating
-
-      - type: custom:vertical-stack-in-card
-        title: Sala de Estar
-        cards:
-          - type: media-control
-            entity: media_player.media_center
-          - type: glance
-            title: Luzes
-            entities:
-              - entity: light.living_room_table
-                name: Mesa
-                tap_action:
-                  action: toggle
-              - entity: light.living_room_window
-                name: Sofá
-                tap_action:
-                  action: toggle
-              - entity: light.living_room_rgb
-                name: Abajur
-                tap_action:
-                  action: toggle
-              - entity: light.tv_leds
-                name: TV LEDs
-                tap_action:
-                  action: toggle
-          - type: sensor
-            entity: sensor.living_room_temp
-            name: Temperatura
-            line_color: '#36A2EB'
-            line_width: 8
-            graph: line
 
       - type: custom:swipe-card
         parameters:
@@ -122,7 +131,7 @@ views:
           - type: sensor
             entity: sensor.helium_cpu_temperature
             name: Helium
-            line_color: '#36A2EB'
+            line_color: '#70FFEB'
             line_width: 8
             graph: line
 

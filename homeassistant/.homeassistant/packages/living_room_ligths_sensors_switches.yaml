@@ -66,13 +66,13 @@ light:
     payload_off: "off"
     optimistic: false
 
-  - platform: group
-    name: Living Room Lights
-    entities:
-      - light.tv_leds
-      - light.living_room_table
-      - light.living_room_window
-      - light.living_room_rgb
+  #- platform: group
+    #name: Living Room Lights
+    #entities:
+      #- light.tv_leds
+      #- light.living_room_table
+      #- light.living_room_window
+      #- light.living_room_rgb
 
 switch:
   - platform: flux

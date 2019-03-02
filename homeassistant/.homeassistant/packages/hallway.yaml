@@ -1,7 +1,7 @@
 binary_sensor:
   - platform: mqtt
     name: "HallwayLightSwitch"
-    state_topic: "cmnd/2_shelly1_21_sw/POWER1"
+    state_topic: "cmnd/shelly1_21_sw/POWER1"
     payload_on: "ON"
     payload_off: "OFF"
 

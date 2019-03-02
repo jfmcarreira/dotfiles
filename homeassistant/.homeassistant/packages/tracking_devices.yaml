@@ -1,24 +1,24 @@
 # Track devices
 device_tracker:
-  - platform: thomson
-    host: !secret router_ip
-    username: !secret router_user
-    password: !secret router_pass
-    consider_home: 30
-    new_device_defaults:
-      track_new_devices: false
+  #- platform: thomson
+    #host: !secret router_ip
+    #username: !secret router_user
+    #password: !secret router_pass
+    #consider_home: 30
+    #new_device_defaults:
+      #track_new_devices: false
   - platform: bluetooth_tracker
     consider_home: 30
-    request_rssi: true
+    request_rssi: false
     new_device_defaults:
       track_new_devices: true
   - platform: ping
-    consider_home: 10
+    consider_home: 30
     new_device_defaults:
       track_new_devices: False
     hosts:
       pegasus: !secret pegasus_ip
-      joao_phone: !secret joao_phone_ip
+      lithium: !secret joao_phone_ip
       bianca_phone: !secret bianca_phone_ip
   - platform: owntracks
     consider_home: 30
@@ -28,6 +28,22 @@ device_tracker:
     mqtt_topic: "owntracks/ha/#"
     waypoints: false
 
+
+#person:
+  #- name: João
+    #id: per_joao
+    ##user_id: !secret user_joao
+    #device_trackers:
+      #- device_tracker.lithium
+      #- device_tracker.lithium_bt
+      #- device_tracker.ha_lithium
+      ##- device_tracker.pegasus
+      ##- device_tracker.pegasus_bt
+
+  #- name: Bianca
+    #id: per_bianca
+    #device_trackers:
+      #- device_tracker.bianca_phone
 
 # Controlled toggles
 input_boolean:
@@ -75,7 +91,7 @@ input_select:
       - Just Left
       - Away
       - Extended Away
-    initial: Home
+    initial: Away
   bianca_status:
     name: Bianca
     options:
@@ -84,52 +100,52 @@ input_select:
       - Just Left
       - Away
       - Extended Away
-    initial: Home
+    initial: Away
 
 
-# Enables support for tracking state changes over time
-recorder:
-  exclude:
-    domains:
-      - device_tracker
-      - person
-    entities:
-      - group.all_devices
-      - group.joao
-      - sensor.joao_status
-      - input_select.joao_status
-      - group.bianca
-      - sensor.bianca_status
-      - input_select.bianca_status
+## Enables support for tracking state changes over time
+#recorder:
+  #exclude:
+    #domains:
+      #- device_tracker
+      #- person
+    #entities:
+      #- group.all_devices
+      #- group.joao
+      #- sensor.joao_status
+      #- input_select.joao_status
+      #- group.bianca
+      #- sensor.bianca_status
+      #- input_select.bianca_status
 
-history:
-  exclude:
-    domains:
-      - device_tracker
-      - person
-    entities:
-      - group.all_devices
-      - group.joao
-      - sensor.joao_status
-      - input_select.joao_status
-      - group.bianca
-      - sensor.bianca_status
-      - input_select.bianca_status
+#history:
+  #exclude:
+    #domains:
+      #- device_tracker
+      #- person
+    #entities:
+      #- group.all_devices
+      #- group.joao
+      #- sensor.joao_status
+      #- input_select.joao_status
+      #- group.bianca
+      #- sensor.bianca_status
+      #- input_select.bianca_status
 
-# View all events in a logbook
-logbook:
-  exclude:
-    domains:
-      - device_tracker
-      - person
-    entities:
-      - group.all_devices
-      - group.joao
-      - sensor.joao_status
-      - input_select.joao_status
-      - group.bianca
-      - sensor.bianca_status
-      - input_select.bianca_status
+## View all events in a logbook
+#logbook:
+  #exclude:
+    #domains:
+      #- device_tracker
+      #- person
+    #entities:
+      #- group.all_devices
+      #- group.joao
+      #- sensor.joao_status
+      #- input_select.joao_status
+      #- group.bianca
+      #- sensor.bianca_status
+      #- input_select.bianca_status
 
 
 
@@ -138,11 +154,11 @@ automation old:
     trigger:
       - platform: state
         entity_id: person.joao
-        from: 'not_home'
+        #from: 'not_home'
         to: 'home'
       - platform: state
-        entity_id: person.helen
-        from: 'not_home'
+        entity_id: person.bianca
+        #from: 'not_home'
         to: 'home'
     action:
       - service: input_select.select_option
@@ -174,12 +190,12 @@ automation old:
         entity_id: input_select.joao_status
         to: 'Just Arrived'
         for:
-          minutes: 2
+          minutes: 1
       - platform: state
         entity_id: input_select.bianca_status
         to: 'Just Arrived'
         for:
-          minutes: 2
+          minutes: 1
       - platform: state
         entity_id: input_select.joao_status
         from: 'Just Left'
@@ -192,7 +208,7 @@ automation old:
       - service: input_select.select_option
         data_template:
           entity_id: >
-            {% if trigger.entity_id == 'person.joao' %}
+            {% if trigger.entity_id == 'input_select.joao_status' %}
               input_select.joao_status
             {% else %}
               input_select.bianca_status
@@ -204,21 +220,21 @@ automation old:
       - platform: state
         entity_id: person.joao
         from: 'home'
-        to: 'not_home'
+        #to: 'not_home'
       - platform: state
         entity_id: person.bianca
         from: 'home'
-        to: 'not_home'
-      - platform: state
-        entity_id: person.joao
-        to: 'not_home'
-        for:
-          minutes: 5
-      - platform: state
-        entity_id: person.bianca
-        to: 'not_home'
-        for:
-          minutes: 5
+        #to: 'not_home'
+      #- platform: state
+        #entity_id: person.joao
+        #to: 'not_home'
+        #for:
+          #minutes: 5
+      #- platform: state
+        #entity_id: person.bianca
+        #to: 'not_home'
+        #for:
+          #minutes: 5
     action:
       - service: input_select.select_option
         data_template:
@@ -236,17 +252,17 @@ automation old:
         entity_id: input_select.joao_status
         to: 'Just Left'
         for:
-          minutes: 10
+          minutes: 5
       - platform: state
         entity_id: input_select.bianca_status
         to: 'Just Left'
         for:
-          minutes: 10
+          minutes: 5
     action:
       - service: input_select.select_option
         data_template:
           entity_id: >
-            {% if trigger.entity_id == 'person.joao' %}
+            {% if trigger.entity_id == 'input_select.joao_status' %}
               input_select.joao_status
             {% else %}
               input_select.bianca_status
@@ -269,7 +285,7 @@ automation old:
       - service: input_select.select_option
         data_template:
           entity_id: >
-            {% if trigger.entity_id == 'person.joao' %}
+            {% if trigger.entity_id == 'input_select.joao_status' %}
               input_select.joao_status
             {% else %}
               input_select.bianca_status

@@ -73,6 +73,7 @@ http:
 ## Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
 
+# Persons configuration
 person:
   - name: João
     id: per_joao
@@ -90,12 +91,11 @@ person:
       - device_tracker.bianca_phone
 
 
-# Enables support for tracking state changes over time
+# History, Recorder and Logbook
 recorder:
 
 history:
 
-# View all events in a logbook
 logbook:
 
 # Enables a map showing the location of tracked devices
