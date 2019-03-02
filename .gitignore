@@ -1,2 +1,4 @@
 .directory
 modules
+secrets.yaml
+secrets.yml
