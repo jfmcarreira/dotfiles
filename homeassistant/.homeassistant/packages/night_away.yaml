@@ -1,5 +1,0 @@
-input_boolean:
-  night_time:
-    name: Night time
-    initial: off
-    icon: mdi:walk

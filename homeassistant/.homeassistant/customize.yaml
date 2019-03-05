@@ -1,8 +1,0 @@
-media_player.media_center:
-  friendly_name: Centro Multimédia
-
-person.bianca:
-  icon: mdi:human-female
-
-person.joao:
-  icon: mdi:human-male

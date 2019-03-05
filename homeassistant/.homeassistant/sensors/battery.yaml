@@ -1,8 +1,0 @@
-- platform: mqtt
-  state_topic: "owntracks/ha/lithium"
-  name: "Lithium Battery"
-  unit_of_measurement: "%"
-  value_template: '{{ value_json.batt }}'
-  device_class: battery
-
-
