@@ -13,7 +13,7 @@ APP = stow
 ARGS = -v -t $(TARGET) --ignore=.directory --ignore=$(INIT_SCRIPT)
 
 
-SUBDIRS = $(shell find . -maxdepth 1 -type d -not -path '*modules' -not -path '.' -not -path '*/\.*' -printf "%f " )
+SUBDIRS = $(shell find . -maxdepth 1 -type d -not -path '*modules' -not -path '.' -not -path '*/\.*' | sed "sw./wwg" )
 
 .PHONY: default $(SUBDIRS) $(SUBDIRS)-clean
 

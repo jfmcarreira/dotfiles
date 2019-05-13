@@ -10,12 +10,12 @@
 
 function cluster_name ()
 {
-  if [ $USER == "lljfmc" ]
+  if [[ $USER == "lljfmc" ]]
   then
     echo -e " \[\e[0;93m\](HPC)"
-  elif [ $USER == "jcarreira.it" ]
+  elif [[ $USER == "jcarreira.it" ]]
   then
-    if [ $( hostname ) == "orion" ]
+    if [[ $( hostname ) == "orion" ]]
     then
       echo -e " \[\e[0;96m\](IT)"
     else
