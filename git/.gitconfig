@@ -1,6 +1,6 @@
 [core]
 	autocrlf = input
-	pager = less -x0
+	pager = less -+FX
 	editor = vim
 
 [diff]
