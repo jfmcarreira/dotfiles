@@ -8,7 +8,8 @@
 	},
   "gitstatus": {
     "args": {
-      "use_dash_c": false
+      "use_dash_c": false,
+      "show_tag": "exact"
     }
   }
 }
