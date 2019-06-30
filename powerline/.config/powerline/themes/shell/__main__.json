@@ -1,15 +1,28 @@
 {
-	"segment_data": {
-		"cwd": {
-			"args": {
-				"dir_limit_depth": 3
-			}
-		}
-	},
-  "gitstatus": {
-    "args": {
-      "use_dash_c": false,
-      "show_tag": "exact"
+  "segment_data": {
+    "hostname": {
+      "args": {
+        "only_if_ssh": true
+      }
+    },
+    "cwd": {
+      "args": {
+        "dir_shorten_len": 20,
+        "dir_limit_depth": 3,
+        "use_path_separator": false,
+        "ellipsis": "None"
+      }
+    },
+    "user": {
+      "args": {
+        "hide_user": "joaoc"
+      }
+    },
+    "gitstatus": {
+      "args": {
+        "use_dash_c": false,
+        "show_tag": "exact"
+      }
     }
   }
 }
