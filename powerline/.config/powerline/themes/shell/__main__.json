@@ -9,7 +9,8 @@
       "args": {
         "dir_shorten_len": 20,
         "dir_limit_depth": 3,
-        "use_path_separator": false
+        "use_path_separator": false,
+        "ellipsis": "None"
       }
     },
     "user": {
