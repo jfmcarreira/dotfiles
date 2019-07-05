@@ -1,6 +1,6 @@
 # Personal collection of dotfiles
 
-This colectiong includes my configurations of the folliwng software (among others):
+This collection includes my configurations of the following software (among others):
 - bash
 - git
 - powerline
@@ -8,6 +8,5 @@ This colectiong includes my configurations of the folliwng software (among other
 - screen
 - kde apps
 - flexget
-- homeassistant
 
 
