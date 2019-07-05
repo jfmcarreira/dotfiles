@@ -28,16 +28,16 @@
             "priority": 30
           },
           {
+            "function": "powerline.segments.shell.cwd",
+            "priority": 15
+          },
+          {
             "function": "powerline.segments.common.env.virtualenv",
             "priority": 40
           },
           {
             "function": "powerline_gitstatus.gitstatus",
             "priority": 20
-          },
-          {
-            "function": "powerline.segments.shell.cwd",
-            "priority": 15
           },
           {
             "function": "powerline.segments.shell.jobnum",
