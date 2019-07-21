@@ -5,7 +5,7 @@ templates:
     thetvdb_lookup: yes
     require_field: series_name
     set:
-      path: /media/data/media/TVShows/{{ series_name|pathscrub }}/Season.{{ series_season }}/
+      path: /storage/data/media/TVShows/{{ series_name|pathscrub }}/Season.{{ series_season }}/
     quality: 720p+ !h265 !10bit
 
   Torrent_Template:
@@ -47,7 +47,7 @@ tasks:
       - Torrent_Template
     rss: https://torrentseeds.org/rss.php?cats=26&torrent_pass=000010e57d23e06389bbf2af897feee4
     set:
-      path: /media/data/media/TVShows/SeriesPremiere
+      path: /storage/data/media/TVShows/SeriesPremiere
     series_premiere: yes
 
 
@@ -60,11 +60,11 @@ tasks:
       - series_name
       - series_season
     filesystem:
-      path: /media/data/incoming/
+      path: /data/incoming/
       regexp: '^((?!\.part(?!0*1\.rar$)\d+\.rar$).)*\.(?:rar|zip)$'
       recursive: yes
     decompress:
-      to: /media/data/media/TVShows/{{ series_name|pathscrub }}/Season.{{ series_season }}/
+      to: /storage/data/media/TVShows/{{ series_name|pathscrub }}/Season.{{ series_season }}/
       keep_dirs: no
       delete_archive: no
 
