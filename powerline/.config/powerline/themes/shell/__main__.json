@@ -8,9 +8,9 @@
     "cwd": {
       "args": {
         "dir_shorten_len": 20,
-        "dir_limit_depth": 3,
+        "dir_limit_depth": 2,
         "use_path_separator": false,
-        "ellipsis": "None"
+        "ellipsis": "."
       }
     },
     "user": {
