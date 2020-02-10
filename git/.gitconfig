@@ -1,7 +1,7 @@
 [core]
 	autocrlf = input
 	pager = less -+FX
-	editor = vim
+	editor = nano
 
 [diff]
 	tool = vimdiff
@@ -51,3 +51,5 @@
   insteadof = lp:
 
 
+[pager]
+	branch = false
