@@ -1,7 +1,7 @@
 [core]
 	autocrlf = input
 	pager = less -+FX
-	editor = nano
+	editor = vim
 
 [diff]
 	tool = vimdiff
@@ -50,6 +50,10 @@
 [url "git+ssh://jfmcarreira@git.launchpad.net/"]
   insteadof = lp:
 
+[url "ssh://git@lithium.home:8322/jfmcarreira/"]
+  insteadOf = selfhosted:
+[url "ssh://git@lithium.home:8322/jfmcarreira/"]
+  pushInsteadOf = selfhosted:
 
 [pager]
 	branch = false
