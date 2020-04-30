@@ -1,0 +1,3 @@
+#!/bin/bash
+input=$1
+convert -density 300 -background white -flatten ${input} ${input%.*}.pdf

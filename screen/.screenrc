@@ -1,14 +1,19 @@
 defutf8 on
 utf8 on on
-hardstatus on
+#hardstatus on
 
 # Enable mouse scrolling and scroll bar history scrolling
-termcapinfo xterm* ti@:te@
+#termcapinfo xterm* ti@:te@
 
 #look and feel
 term "screen-256color"
+#caption always "%{kY} %n%f* %t %?%{YR}%{kR} %u %{Rb}%:%{Yb}%?%?%F%{.b}%:%{.w}%?%="
+
 caption always "%{kY} %n%f* %t %?%{YR}%{kR} %u %{Rb}%:%{Yb}%?%?%F%{.b}%:%{.w}%?%="
-hardstatus alwayslastline "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%d.%m.%Y %{w}| %{g}%l %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
+hardstatus alwayslastline "%{bk} %S %{kb} $LOGNAME %{bk} %H %?%{kb}%{kY} %-Lw%{Yk}%:%{Yb}%{Yk}%?%{Yk} %n%f* %t %{kY}%+Lw %-="
+
+
+#hardstatus alwayslastline "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%d.%m.%Y %{w}| %{g}%l %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
 
 # skip the startup message
 startup_message off
@@ -25,5 +30,8 @@ vbell_msg "bell on %t (%n)"
 
 activity "Activity in %t(%n)"
 
-shelltitle "shell"
-shell -$SHELL
+#shelltitle "shell"
+#shell -$SHELL
+
+bindkey -k k6 prev
+bindkey -k k7 next
