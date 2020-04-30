@@ -1,0 +1,101 @@
+#!/bin/bash
+
+function select_tunnel()
+{
+# Default server
+NETWORKMASK="XXX.XXX.XXX.XXX/XX"
+RUSER="<user>"
+RHOST="<server>"
+PORT="<port>"
+}
+
+source tunnel-shuttle-select-source
+
+function create_auto_ssh_tunnel()
+{
+  echo "Creating autossh tunnel to ${@}"
+  autossh -M 0 -fN -o "ServerAliveInterval 45" -o "ServerAliveCountMax 2" $@ &
+  AUTO_SSH_PID=$(ps aux | grep autossh | grep "${@}" | awk '{print $2}')
+  sleep 2s
+}
+
+SCREEN_NAME=tunnel_shuttle
+FOWARD_ALL=0
+SERVER=0
+OPTIONS=
+AUTO_SSH_PID=
+DETACH=
+
+select_tunnel "$@"
+
+for i in "$@"
+do
+case $i in
+    -a|--all)
+      FOWARD_ALL=1
+    ;;
+    --host=*)
+      RHOST="${i#*=}"
+    ;;
+    --port=*)
+      PORT="${i#*=}"
+    ;;
+    --user=*)
+      RUSER="${i#*=}"
+    ;;
+    --mask=*)
+      NETWORKMASK="${i#*=}"
+    ;;
+    --dns)
+      OPTIONS=--dns
+    ;;
+    -d|--detach)
+      DETACH=-d
+    ;;
+    *)
+    # unknown option
+    ;;
+esac
+done
+
+if [[ -z $STY ]]
+then
+  HAS_SCREEN=$( screen -ls | grep ${SCREEN_NAME} )
+  if [[ ! -z $HAS_SCREEN ]]
+  then
+    echo "Entering into the screen session"
+    screen -x ${SCREEN_NAME}
+    exit
+  else
+    echo "Creating a new screen session"
+    screen -t ${SCREEN_NAME} -S ${SCREEN_NAME}_screen -m $0 $@
+    exit
+  fi
+fi
+
+if [[ -z ${RUSER} ]]
+then
+  echo "Empty RUSER"
+  exit
+fi
+
+if [[ -z ${RHOST} ]]
+then
+  echo "Empty RHOST"
+  exit
+fi
+
+if [[ ${FOWARD_ALL} -eq 1 ]]
+then
+  NETWORKMASK=0/0
+  echo "Routing all connections"
+fi
+
+echo "/usr/bin/sshuttle $OPTIONS -v -r $RUSER@$RHOST:$PORT $NETWORKMASK"
+/usr/bin/sshuttle $OPTIONS -v -r $RUSER@$RHOST:$PORT $NETWORKMASK -x $RHOST
+
+if [[ ! -z $AUTO_SSH_PID ]]
+then
+  echo "Killing autossh tunnel"
+  kill $AUTO_SSH_PID
+fi
