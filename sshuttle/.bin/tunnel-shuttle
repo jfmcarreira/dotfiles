@@ -3,13 +3,13 @@
 function select_tunnel()
 {
 # Default server
-NETWORKMASK="XXX.XXX.XXX.XXX/XX"
+NETWORKMASK="<mask>"
 RUSER="<user>"
-RHOST="<server>"
+RHOST="<ip>"
 PORT="<port>"
 }
 
-source tunnel-shuttle-select-source
+source tunnel-shuttle-select-source.bash
 
 function create_auto_ssh_tunnel()
 {
@@ -20,11 +20,13 @@ function create_auto_ssh_tunnel()
 }
 
 SCREEN_NAME=tunnel_shuttle
+AUTO_SSH_PID=
+VPN_DISCONNET=
 FOWARD_ALL=0
 SERVER=0
 OPTIONS=
-AUTO_SSH_PID=
 DETACH=
+
 
 select_tunnel "$@"
 
@@ -98,4 +100,9 @@ if [[ ! -z $AUTO_SSH_PID ]]
 then
   echo "Killing autossh tunnel"
   kill $AUTO_SSH_PID
+fi
+
+if [[ ! -z $VPN_DISCONNET ]]
+then
+  $VPN_DISCONNET
 fi
