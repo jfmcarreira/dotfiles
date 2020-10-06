@@ -21,9 +21,10 @@ alias ll='ls -hvl'
 alias katedit='SUDO_EDITOR=kate sudoedit'
 
 
-alias athena-bin-host='ssh -t athena.itleiria.pt screen -R gentooBinHost -d'
+#alias athena-bin-host='ssh -t athena.itleiria.pt screen -R gentooBinHost -d'
+alias binhost-screen='ssh -t titan.itleiria.pt screen -R gentooBinHost -d'
 
 
 alias pdf2png='convert -density 300 -background white -flatten'
 
-alias cdp='cd ~/Dropbox/InstitutoTelec/PhD/'
+alias find-cursor='find-cursor --repeat 0 --follow --distance 1 --line-width 16 --size 16 --color red'

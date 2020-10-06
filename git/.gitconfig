@@ -2,6 +2,7 @@
 	autocrlf = input
 	pager = less -+FX
 	editor = vim
+	askpass = /usr/bin/ksshaskpass
 
 [diff]
 	tool = vimdiff
@@ -50,10 +51,13 @@
 [url "git+ssh://jfmcarreira@git.launchpad.net/"]
   insteadof = lp:
 
-[url "https://git.jfmcarreira.pt/jfmcarreira/"]
+[url "https://jfmcarreira@git.jfmcarreira.pt/jfmcarreira/"]
   insteadOf = selfhosted:
-[url "https://git.jfmcarreira.pt/jfmcarreira/"]
+[url "https://jfmcarreira@git.jfmcarreira.pt/jfmcarreira/"]
   pushInsteadOf = selfhosted:
+
+[pull]
+  ff = only
 
 [pager]
 	branch = false
