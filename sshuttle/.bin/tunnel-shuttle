@@ -21,6 +21,7 @@ function create_auto_ssh_tunnel()
 
 SCREEN_NAME=tunnel_shuttle
 AUTO_SSH_PID=
+VPN_CONNECT=
 VPN_DISCONNET=
 FOWARD_ALL=0
 SERVER=0
@@ -70,7 +71,7 @@ then
     exit
   else
     echo "Creating a new screen session"
-    screen -t ${SCREEN_NAME} -S ${SCREEN_NAME}_screen -m $0 $@
+    screen -t ${SCREEN_NAME} -S ${SCREEN_NAME}_screen -m $DETACH $0 $@
     exit
   fi
 fi
@@ -93,8 +94,13 @@ then
   echo "Routing all connections"
 fi
 
-echo "/usr/bin/sshuttle $OPTIONS -v -r $RUSER@$RHOST:$PORT $NETWORKMASK"
-/usr/bin/sshuttle $OPTIONS -v -r $RUSER@$RHOST:$PORT $NETWORKMASK -x $RHOST
+if [[ ! -z $VPN_CONNECT ]]
+then
+  eval $VPN_CONNECT
+fi
+
+echo "/usr/bin/sshuttle $OPTIONS -v -r $RUSER@$RHOST:$PORT $NETWORKMASK -x ${RHOST}:22"
+/usr/bin/sshuttle $OPTIONS -v -r $RUSER@$RHOST:$PORT $NETWORKMASK -x ${RHOST}:22
 
 if [[ ! -z $AUTO_SSH_PID ]]
 then
@@ -104,5 +110,5 @@ fi
 
 if [[ ! -z $VPN_DISCONNET ]]
 then
-  $VPN_DISCONNET
+  eval $VPN_DISCONNET
 fi
