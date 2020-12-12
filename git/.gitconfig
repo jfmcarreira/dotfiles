@@ -21,7 +21,7 @@
 	ui = auto
 
 [credential]
-	helper = cache
+	helper = store
 
 [url "https://chromium.googlesource.com/a/"]
 	insteadOf = https://chromium.googlesource.com/
