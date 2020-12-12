@@ -26,4 +26,5 @@ alias athena-bin-host='ssh -t athena.itleiria.pt screen -R gentooBinHost -d'
 
 alias pdf2png='convert -density 300 -background white -flatten'
 
-alias cdp='cd ~/Dropbox/InstitutoTelec/PhD/'
+
+alias libreoffice2pdf='libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir .'
