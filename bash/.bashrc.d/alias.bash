@@ -19,10 +19,10 @@ alias stowdotfiles='stow -t ~/'
 alias ls='ls -h'
 alias ll='ls -hvl'
 alias katedit='SUDO_EDITOR=kate sudoedit'
-
+alias btrfs-sbl='btrfs subvolume list --sort=path'
 
 #alias athena-bin-host='ssh -t athena.itleiria.pt screen -R gentooBinHost -d'
-alias binhost-screen='ssh -t titan.itleiria.pt screen -R gentooBinHost -d'
+alias binhost-screen='ssh -t  icarus.itleiria.pt screen -R gentooBinHost -d'
 
 alias pdf2png='convert -density 300 -background white -flatten'
 
