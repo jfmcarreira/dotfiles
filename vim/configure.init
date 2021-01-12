@@ -1,3 +1,5 @@
 # Create necessary dirs
 TARGET=$1
-#mkdir -p ${TARGET}/.vim
+mkdir -p ${TARGET}/.vim
+mkdir -p ${TARGET}/.vim/autoload
+mkdir -p ${TARGET}/.vim/plugin
