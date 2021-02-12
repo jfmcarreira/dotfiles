@@ -12,6 +12,14 @@ if [ -d ~/.bashrc.d ] ; then
     done
 fi
 
+# Generic stuff for multiple shells
+if [ -d ~/.env.d ] ; then
+    for sh in ~/.env.d/*.sh ; do
+        [[ -r ${sh} ]] && source "${sh}"
+    done
+fi
+
+
 # Test for an interactive shell.  There is no need to set anything
 # past this point for scp and rcp, and it's important to refrain from
 # outputting anything in those cases.

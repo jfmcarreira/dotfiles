@@ -23,7 +23,7 @@ default:
 
 $(SUBDIRS):
 	@echo "Installing pkg $@"
-	@if [ -a $@/$(INIT_SCRIPT) ]; then $@/$(INIT_SCRIPT) $(TARGET); fi;
+	@if [[ -f $@/$(INIT_SCRIPT) ]]; then /bin/sh $@/$(INIT_SCRIPT) $(TARGET); fi;
 	$(APP) $(ARGS) $@
 
 clean-set-args:

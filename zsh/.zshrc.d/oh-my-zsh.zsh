@@ -1,4 +1,4 @@
-# export ZSH="/home/joaoc/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -69,7 +69,7 @@ ZSH_THEME="robbyrussell-carreira"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-interactive-cd sudo last-working-dir fzf fd)
 
 source $ZSH/oh-my-zsh.sh
 

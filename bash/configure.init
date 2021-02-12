@@ -2,3 +2,4 @@
 TARGET=$1
 mkdir -p ${TARGET}/.bashrc.d
 mkdir -p ${TARGET}/.bash_completion.d
+mkdir -p ${TARGET}/.env.d
