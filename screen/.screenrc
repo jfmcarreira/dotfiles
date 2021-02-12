@@ -3,7 +3,7 @@ utf8 on on
 #hardstatus on
 
 # Enable mouse scrolling and scroll bar history scrolling
-#termcapinfo xterm* ti@:te@
+termcapinfo xterm* ti@:te@
 
 #look and feel
 term "screen-256color"
@@ -18,7 +18,7 @@ hardstatus alwayslastline "%{bk} %S %{kb} $LOGNAME %{bk} %H %?%{kb}%{kY
 # skip the startup message
 startup_message off
 
-# Automatically detach on hangup. 
+# Automatically detach on hangup.
 autodetach on
 
 # Change default scrollback value for new windows
