@@ -3,4 +3,4 @@ TARGET=$1
 mkdir -p ${TARGET}/.zshrc.d
 mkdir -p ${TARGET}/.zsh_completion.d
 mkdir -p ${TARGET}/.env.d
-[[ if -! -d ${TARGET}/.oh-my-zsh ]] && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+[[ -d ${TARGET}/.oh-my-zsh ]] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

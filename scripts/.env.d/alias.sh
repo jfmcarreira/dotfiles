@@ -2,7 +2,8 @@
 # Alias
 ##################################################
 # only load in gentoo
-if [ $(command -v lsb_release >/dev/null 2>&1 && echo true) ] && [ $(lsb_release -i | awk '{ print $3}') == "Gentoo" ]
+#if [ $(command -v lsb_release >/dev/null 2>&1 && echo true) ] && [ $(lsb_release -i | awk '{ print $3}') == "Gentoo" ]
+if [[ -f /etc/portage/make.conf ]]
 then
     alias world_update='emerge --update --newuse --deep world'
 fi
