@@ -7,15 +7,15 @@
     },
     "cwd": {
       "args": {
-        "dir_shorten_len": 20,
-        "dir_limit_depth": 2,
+        "dir_shorten_len": 10,
+        "dir_limit_depth": 4,
         "use_path_separator": false,
         "ellipsis": "."
       }
     },
     "user": {
       "args": {
-        "hide_user": "joaoc"
+        "hide_user": "joaoc1"
       }
     },
     "gitstatus": {

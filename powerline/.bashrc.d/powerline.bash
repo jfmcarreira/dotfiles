@@ -13,4 +13,6 @@ if [[ $? -eq 0  ]]; then
   [[ -f $BASH_BINDING ]] && source $BASH_BINDING
   BASH_BINDING="/usr/share/powerline/bindings/bash/powerline.sh"
   [[ -f $BASH_BINDING ]] && source $BASH_BINDING
+  BASH_BINDING="/usr/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh"
+  [[ -f $BASH_BINDING ]] && source $BASH_BINDING
 fi
