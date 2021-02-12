@@ -38,6 +38,9 @@ shopt -s no_empty_cmd_completion
 # Enable history appending instead of overwriting when exiting.  #139609
 shopt -s histappend
 
+# Spell check for cd
+shopt -s cdspell
+
 # Save each command to the history file as it's executed.  #517342
 # This does mean sessions get interleaved when reading later on, but this
 # way the history is always up to date.  History is not synced across live
