@@ -5,6 +5,8 @@
 #   source all files in .bashrc.d
 #   all files need to check for interactive shell
 
+CURRENT_SHELL="bash"
+
 # Put your fun stuff here.
 if [ -d ~/.bashrc.d ] ; then
     for sh in ~/.bashrc.d/*.bash ; do

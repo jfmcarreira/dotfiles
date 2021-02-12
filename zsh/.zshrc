@@ -1,3 +1,4 @@
+CURRENT_SHELL="zsh"
 
 # Put your fun stuff here.
 if [ -d ~/.zshrc.d ] ; then
