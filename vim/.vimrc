@@ -149,6 +149,12 @@ augroup END
 nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 
+" Save shortcuts
+nmap <c-s> :w<CR>
+vmap <c-s> <Esc><c-s>gv
+imap <c-s> <Esc><c-s>
+
+
 " Move lines up and down
 nnoremap <S-Up> :m-2<CR>
 nnoremap <S-Down> :m+<CR>
