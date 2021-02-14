@@ -1,7 +1,7 @@
 [core]
 	autocrlf = input
 	pager = less -+FX
-	editor = vim
+	editor = nvim
 	askpass = /usr/bin/ksshaskpass
 
 [diff]
