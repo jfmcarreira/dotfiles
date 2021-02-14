@@ -35,7 +35,7 @@ ZSH_THEME="robbyrussell-carreira"
 # DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -69,7 +69,7 @@ ZSH_THEME="robbyrussell-carreira"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-interactive-cd sudo last-working-dir fzf fd)
+plugins=(git zsh-interactive-cd sudo last-working-dir fzf fd alias-finder)
 
 source $ZSH/oh-my-zsh.sh
 

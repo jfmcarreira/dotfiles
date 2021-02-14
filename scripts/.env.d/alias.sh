@@ -9,8 +9,8 @@ then
 fi
 alias utop='htop -u jcarreira.it'
 alias matlab_cmd='matlab -nosplash -nodesktop -nojvm -nodisplay'
-alias ls='ls -h'
-alias ll='ls -hvl'
+alias ls='ls -h --color'
+alias ll='ls -hvl --color'
 alias katedit='SUDO_EDITOR=kate sudoedit'
 alias btrfs-sbl='btrfs subvolume list --sort=path'
 alias binhost-screen='ssh -t  icarus.itleiria.pt screen -R gentooBinHost -d'
