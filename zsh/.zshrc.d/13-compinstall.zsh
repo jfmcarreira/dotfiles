@@ -7,8 +7,8 @@ compinit
 autoload bashcompinit
 bashcompinit
 
-if [ -d ~/.zsh_completion.d ] ; then
-    for sh in ~/.zsh_completion.d/*; do
+if [ -d $HOME/.zsh_completion.d ] ; then
+    for sh in $HOME/.zsh_completion.d/*; do
         [[ -r ${sh} ]] && source "${sh}"
     done
 fi

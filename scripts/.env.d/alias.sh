@@ -17,3 +17,7 @@ alias binhost-screen='ssh -t  icarus.itleiria.pt screen -R gentooBinHost -d'
 alias pdf2png='convert -density 300 -background white -flatten'
 alias libreoffice2pdf='libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir .'
 alias find-cursor='find-cursor --repeat 0 --follow --distance 1 --line-width 16 --size 16 --color red'
+
+
+# Git
+alias gs='git status'

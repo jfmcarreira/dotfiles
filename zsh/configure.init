@@ -3,4 +3,5 @@ TARGET=$1
 mkdir -p ${TARGET}/.zshrc.d
 mkdir -p ${TARGET}/.zsh_completion.d
 mkdir -p ${TARGET}/.env.d
-[[ -d ${TARGET}/.oh-my-zsh ]] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+mkdir -p ${TARGET}/.oh-my-zsh/custom
+mkdir -p ${TARGET}/.oh-my-zsh/custom/themes
