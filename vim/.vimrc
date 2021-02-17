@@ -116,6 +116,10 @@ Plug 'Chiel92/vim-autoformat'
 " Improve discovery of project root
 Plug 'airblade/vim-rooter'
 
+for rcfile in split(globpath("$HOME/.vim/", "*.plug"), '\n')
+    execute('source '.rcfile)
+endfor
+
 " Initialize plugin system
 call plug#end()
 

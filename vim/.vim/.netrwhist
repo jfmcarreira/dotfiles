@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/joaoc'
+let g:netrw_dirhist_1='/home/joaoc/Programming/Calyp/calyp'
+let g:netrw_dirhist_0='/home/joaoc/Programming/Calyp/calyp/modules/tests'
+let g:netrw_dirhist_9='/home/joaoc/Programming/Calyp/calyp/modules'
+let g:netrw_dirhist_8='/home/joaoc/Programming/Calyp/calyp'
+let g:netrw_dirhist_7='/home/joaoc/Programming/Python/pyPlotGenerator'
+let g:netrw_dirhist_6='/home/joaoc/Programming/Calyp/calyp/modules/tests'
+let g:netrw_dirhist_5='/home/joaoc/Programming/Calyp/calyp/modules'
+let g:netrw_dirhist_4='/home/joaoc/Programming/Calyp/calyp'
+let g:netrw_dirhist_3='/home/joaoc/Programming/Calyp/calyp/modules/tests'
