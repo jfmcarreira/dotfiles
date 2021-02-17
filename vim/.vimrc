@@ -83,11 +83,6 @@ Plug 'sickill/vim-monokai'
 
 " Shell / Vim
 "Plug 'powerline/powerline'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-" If you want to display icons, then use one of these plugins:
-Plug 'kyazdani42/nvim-web-devicons' " lua
-Plug 'ryanoasis/vim-devicons' " vimscript
-
 
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -102,7 +97,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
 
 " LSP
-Plug 'neovim/nvim-lspconfig'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'mattn/vim-lsp-settings'
 "Plug 'prabirshrestha/asyncomplete.vim'
@@ -164,11 +158,3 @@ nnoremap <S-Up> :m-2<CR>
 nnoremap <S-Down> :m+<CR>
 inoremap <S-Up> <Esc>:m-2<CR>
 inoremap <S-Down> <Esc>:m+<CR>
-
-" loading the plugin
-let g:webdevicons_enable = 1
-"let g:asyncomplete_auto_completeopt = 0
-
-luafile ~/.vim/lsp-config.lua
-"luafile ~/.vim/galaxyline-evil.lua
-luafile ~/.vim/galaxyline-evilline.lua
