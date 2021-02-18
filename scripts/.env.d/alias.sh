@@ -21,3 +21,4 @@ alias find-cursor='find-cursor --repeat 0 --follow --distance 1 --line-width 16 
 
 # Git
 alias gs='git status'
+alias gl='git log --all --graph --decorate'
