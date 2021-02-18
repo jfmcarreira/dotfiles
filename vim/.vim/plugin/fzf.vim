@@ -5,4 +5,4 @@ endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
 map <C-p> :ProjectFiles<CR>
-map <C-g:lsp_diagnostics_enablee> :Ag<CR>
+map <C-g> :Ag<CR>
