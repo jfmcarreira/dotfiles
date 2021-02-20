@@ -75,7 +75,7 @@ DISABLE_LS_COLORS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-interactive-cd sudo last-working-dir fzf fd alias-finder tmux zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-interactive-cd sudo last-working-dir fzf fd alias-finder tmux)
 
 source $ZSH/oh-my-zsh.sh
 
