@@ -1,4 +1,4 @@
-export ZPLUG_HOME=$HOME/.zplug
+export ZPLUG_HOME=$HOME/.zshrc.d/zplug
 
 if [[ ! -d $ZPLUG_HOME ]]
 then
