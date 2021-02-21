@@ -1,9 +1,9 @@
 export ZSH="$HOME/.oh-my-zsh"
-
 # Install oh-my-zsh
-if [[ ! -d $HOME/.oh-my-zsh ]]
+if [[ ! -f $ZSH/oh-my-zsh.sh ]]
 then
-   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  [[ -d $ZSH ]] && rm -Rf $ZSH
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # If you come from bash you might have to change your $PATH.
