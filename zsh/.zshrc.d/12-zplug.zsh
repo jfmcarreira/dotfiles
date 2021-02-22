@@ -9,6 +9,10 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-autosuggestions", as:plugin, depth:1
 zplug "zsh-users/zsh-syntax-highlighting", as:plugin, depth:1
+# zplug "marlonrichert/zsh-autocomplete", as:plugin, depth:1
+# zplug "MichaelAquilina/zsh-auto-notify", as:plugin, depth:1
+#zplug "gretzky/auto-color-ls", as:plugin, depth:1
+
 # Supports oh-my-zsh plugins and the like
 zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/zsh-interactive-cd",   from:oh-my-zsh
