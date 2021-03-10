@@ -4,5 +4,5 @@ mkdir -p ${TARGET}/.zshrc.d
 mkdir -p ${TARGET}/.zsh_completion.d
 mkdir -p ${TARGET}/.env.d
 #source ${TARGET}/.zshrc
-mkdir -p ${TARGET}/.oh-my-zsh/custom
-mkdir -p ${TARGET}/.oh-my-zsh/custom/themes
+#mkdir -p ${TARGET}/.oh-my-zsh/custom
+#mkdir -p ${TARGET}/.oh-my-zsh/custom/themes
