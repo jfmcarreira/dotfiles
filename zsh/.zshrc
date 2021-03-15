@@ -1,13 +1,5 @@
 CURRENT_SHELL="zsh"
 
-# Put your fun stuff here.
-if [ -d ~/.zshrc.d ] ; then
-  for sh in ~/.zshrc.d/*.zsh ; do
-    [[ -r ${sh} ]] && source "${sh}"
-  done
-fi
-
-
 # Generic stuff for multiple shells
 if [ -d ~/.env.d ] ; then
     for sh in ~/.env.d/*.sh ; do
@@ -15,6 +7,12 @@ if [ -d ~/.env.d ] ; then
     done
 fi
 
+# Put your fun stuff here.
+if [ -d ~/.zshrc.d ] ; then
+  for sh in ~/.zshrc.d/*.zsh ; do
+    [[ -r ${sh} ]] && source "${sh}"
+  done
+fi
 
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo

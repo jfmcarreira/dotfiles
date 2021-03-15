@@ -13,7 +13,6 @@ alias ls='ls -h --color'
 alias ll='ls -hvl --color'
 alias katedit='SUDO_EDITOR=kate sudoedit'
 alias btrfs-sbl='btrfs subvolume list --sort=path'
-alias binhost-screen='ssh -t  icarus.itleiria.pt screen -R gentooBinHost -d'
 alias pdf2png='convert -density 300 -background white -flatten'
 alias libreoffice2pdf='libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir .'
 alias find-cursor='find-cursor --repeat 0 --follow --distance 1 --line-width 16 --size 16 --color red'
@@ -22,3 +21,6 @@ alias find-cursor='find-cursor --repeat 0 --follow --distance 1 --line-width 16 
 # Git
 alias gs='git status'
 alias gl='git log --graph --decorate'
+
+# Binhost
+alias binhost-screen='ssh -t  icarus.itleiria.pt tmux a -t gentooBinHost'
