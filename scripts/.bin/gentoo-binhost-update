@@ -1,0 +1,5 @@
+#!/bin/bash
+[[ -z $(ps aux | grep emerge | grep -v grep) ]] && exit 0
+emaint sync -A
+emerge --update --newuse --deep world
+eix-sync
