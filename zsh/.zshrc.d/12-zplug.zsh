@@ -16,7 +16,7 @@ zplug "zsh-users/zsh-syntax-highlighting", as:plugin, depth:1
 # Supports oh-my-zsh plugins and the like
 # zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/zsh-interactive-cd",   from:oh-my-zsh
-zplug "plugins/sudo",   from:oh-my-zsh
+#zplug "plugins/sudo",   from:oh-my-zsh
 zplug "plugins/fzf",   from:oh-my-zsh
 zplug "plugins/fd",   from:oh-my-zsh
 zplug "plugins/alias-finder",   from:oh-my-zsh
