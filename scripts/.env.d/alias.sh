@@ -23,4 +23,5 @@ alias gs='git status'
 alias gl='git log --graph --decorate'
 
 # Binhost
-alias binhost-screen='ssh -t  icarus.itleiria.pt tmux a -t gentooBinHost'
+#alias binhost-screen='ssh -t  icarus.itleiria.pt tmux a -t gentooBinHost'
+alias binhost-screen='ssh -t  root@gentoo-binhost.home tmux a -t gentooBinHost || ssh -t  root@gentoo-binhost.home tmux new -t gentooBinHost'
