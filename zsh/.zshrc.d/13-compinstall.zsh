@@ -12,3 +12,7 @@ if [ -d $HOME/.zsh_completion.d ] ; then
         [[ -r ${sh} ]] && source "${sh}"
     done
 fi
+
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+setopt autocd
