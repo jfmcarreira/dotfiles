@@ -53,7 +53,7 @@ set clipboard=unnamedplus
 " do not auto complete
 set completeopt=noinsert,noselect
 
-"set mouse=a
+set mouse=a
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -84,7 +84,7 @@ Plug 'sickill/vim-monokai'
 " Shell / Vim
 "Plug 'powerline/powerline'
 
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -109,6 +109,10 @@ Plug 'Chiel92/vim-autoformat'
 
 " Improve discovery of project root
 Plug 'airblade/vim-rooter'
+
+" Tabs
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
 
 for rcfile in split(globpath("$HOME/.vim/", "*.plug"), '\n')
     execute('source '.rcfile)
