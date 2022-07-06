@@ -21,3 +21,4 @@ zplug "plugins/fzf",   from:oh-my-zsh
 zplug "plugins/fd",   from:oh-my-zsh
 zplug "plugins/alias-finder",   from:oh-my-zsh
 zplug "plugins/tmux",   from:oh-my-zsh
+zplug "agkozak/zsh-z"
