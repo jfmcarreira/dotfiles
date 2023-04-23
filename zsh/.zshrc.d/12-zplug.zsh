@@ -9,7 +9,7 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-autosuggestions", as:plugin, depth:1
 zplug "zsh-users/zsh-syntax-highlighting", as:plugin, depth:1
-# zplug "marlonrichert/zsh-autocomplete", as:plugin, depth:1
+#zplug "marlonrichert/zsh-autocomplete", as:plugin, depth:1
 # zplug "MichaelAquilina/zsh-auto-notify", as:plugin, depth:1
 #zplug "gretzky/auto-color-ls", as:plugin, depth:1
 
