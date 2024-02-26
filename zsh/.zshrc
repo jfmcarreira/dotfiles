@@ -1,5 +1,9 @@
 CURRENT_SHELL="zsh"
 
+export LC_ALL=en_GB.UTF-8 && export LANG=en_GB.UTF-8
+#export LANG=en_GB.UTF-8
+#export LC_CTYPE="UTF-8"
+
 # Generic stuff for multiple shells
 if [ -d ~/.env.d ] ; then
     for sh in ~/.env.d/*.sh ; do
@@ -26,3 +30,8 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

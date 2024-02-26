@@ -84,7 +84,7 @@ Plug 'sickill/vim-monokai'
 " Shell / Vim
 "Plug 'powerline/powerline'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -114,6 +114,8 @@ Plug 'airblade/vim-rooter'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 for rcfile in split(globpath("$HOME/.vim/", "*.plug"), '\n')
     execute('source '.rcfile)
 endfor
@@ -133,18 +135,18 @@ colorscheme ayu
 
 "colorscheme monokai
 
-fun! TrimWhitespace()
-  let l:save = winsaveview()
-  keeppatterns %s/\s\+$//e
-  call winrestview(l:save)
-endfun
+"fun! TrimWhitespace()
+"  let l:save = winsaveview()
+"  keeppatterns %s/\s\+$//e
+"  call winrestview(l:save)
+"endfun
 
 
-augroup CARREIRA
-  autocmd!
-  autocmd BufWritePre * :call TrimWhitespace()
-  "autocmd BufWritePre * :Autoformat
-augroup END
+"augroup CARREIRA
+"  autocmd!
+"  autocmd BufWritePre * :call TrimWhitespace()
+"  "autocmd BufWritePre * :Autoformat
+"augroup END
 
 "nnoremap <Leader>b :ls<CR>:b<Space>
 "nnoremap <Leader>f :FZF<CR>
@@ -162,3 +164,5 @@ nnoremap <S-Up> :m-2<CR>
 nnoremap <S-Down> :m+<CR>
 inoremap <S-Up> <Esc>:m-2<CR>
 inoremap <S-Down> <Esc>:m+<CR>
+
+luafile ~/.vim/treesitter.lua
