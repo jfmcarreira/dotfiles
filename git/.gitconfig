@@ -20,6 +20,13 @@
 
 [color]
 	ui = auto
+        status = auto
+
+[color "status"]
+        added = green
+        changed = cyan
+        untracked = magenta
+        deleted = red
 
 [credential]
 	helper = store
