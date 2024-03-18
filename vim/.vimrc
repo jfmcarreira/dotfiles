@@ -53,7 +53,9 @@ set clipboard=unnamedplus
 " do not auto complete
 set completeopt=noinsert,noselect
 
-set mouse=a
+" Set to use mouse controls
+" This prevents some mouse actions
+"set mouse=a
 
 " Give more space for displaying messages.
 set cmdheight=2
