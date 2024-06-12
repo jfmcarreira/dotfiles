@@ -73,3 +73,14 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[alias]
+  co = checkout
+  ci = commit
+
+  current = rev-parse --abbrev-ref HEAD
+
+  pto = !CURRENT=$(git current) && git push origin $CURRENT
+  pfo = !CURRENT=$(git current) && git pull origin $CURRENT
+
+  sync = !git fetch origin && git reset --hard origin/$(git current)
