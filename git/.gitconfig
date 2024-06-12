@@ -58,9 +58,9 @@
 [url "git+ssh://jfmcarreira@git.launchpad.net/"]
   insteadof = lp:
 
-[url "git@jfmcarreira.pt:jfmcarreira/"]
+[url "git@jcarreira.pt:jfmcarreira/"]
   insteadOf = selfhosted:
-[url "git@jfmcarreira.pt:jfmcarreira/"]
+[url "git@jcarreira.pt:jfmcarreira/"]
   pushInsteadOf = selfhosted:
 
 [pull]
@@ -68,6 +68,7 @@
 
 [pager]
 	branch = false
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
