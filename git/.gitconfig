@@ -58,9 +58,9 @@
 [url "git+ssh://jfmcarreira@git.launchpad.net/"]
   insteadof = lp:
 
-[url "gitea@jcarreira.pt:jfmcarreira/"]
+[url "gitea@git.jcarreira.pt:jfmcarreira/"]
   insteadOf = selfhosted:
-[url "gitea@jcarreira.pt:jfmcarreira/"]
+[url "gitea@git.jcarreira.pt:jfmcarreira/"]
   pushInsteadOf = selfhosted:
 
 [pull]
