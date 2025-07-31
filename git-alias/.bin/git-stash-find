@@ -1,0 +1,9 @@
+#!/bin/bash
+stash_count=$(git stash list | wc -l)
+for i in $(seq 0 $((stash_count - 1)))
+do
+  if git stash show --name-only "$i" | grep -q "$@"; then
+    echo "Changes in $i:"
+    git stash show -p "$i"
+  fi
+done
