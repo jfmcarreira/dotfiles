@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TOP=0
+
+# Screen source for macOS AVFoundation.
+# Change this if your second monitor has a different name/index.
+INPUT_SOURCE="Capture screen 1:none"
+
+exec ffplay \
+  -top "$TOP" \
+  -window_title "SECOND SCREEN PREVIEW" \
+  -fflags nobuffer \
+  -flags low_delay \
+  -f avfoundation \
+  -framerate 30 \
+  -capture_cursor 1 \
+  -capture_mouse_clicks 1 \
+  -i "$INPUT_SOURCE"
