@@ -1,5 +1,5 @@
-vim.lsp.config('luals', {
-  cmd = {'lua-language-server'},
-  filetypes = {'lua'},
-  root_markers = {'.luarc.json', '.luarc.jsonc'},
-})
+return {
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  root_markers = { '.luarc.json', '.luarc.jsonc' },
+}
