@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+DIR="${1:-.}"
+
+while IFS= read -r -d '' file; do
+    tracks=$(ffprobe -v error \
+        -select_streams a \
+        -show_entries stream_tags=language,title,language_ietf \
+        -of compact=p=0 "$file") || continue
+
+    # Ignore undefined languages
+    defined=$(grep -Ei 'tag:language=[^|]+' <<< "$tracks" |
+        grep -Eiv 'tag:language=und(\||$)')
+
+    [[ -z "$defined" ]] && continue
+
+    # Find Portuguese tracks, excluding Brazilian Portuguese
+    portuguese=$(grep -Ei 'tag:language=(por|pt|pt-pt)(\||$)' <<< "$tracks" |
+        grep -Eiv 'brazil|brasil|pt[-_ ]?br')
+
+    [[ -z "$portuguese" ]] && echo "$file"
+
+done < <(find "$DIR" -type f \( -iname '*.mkv' -o -iname '*.mp4' -o -iname '*.avi' -o -iname '*.mov' -o -iname '*.m4v' \) -print0)
